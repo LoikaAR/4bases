@@ -1,7 +1,7 @@
 import os
 from openpyxl import load_workbook
 
-path = "./esempio_dati"
+path = "../esempio_dati"
 dir_list = list(os.listdir(path))
 
 for dir in dir_list:
@@ -19,7 +19,7 @@ for dir in dir_list:
             all_rows = list(ws.rows)
             all_cols = list(ws.columns)
 
-            print(f"found {len(all_rows)} of variants in this file")
+            print(f"found {len(all_rows)} variants in this file")
 
             # print the names of the columns and their corresponding values  
             for i in range (1, len(all_rows)):
