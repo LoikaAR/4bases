@@ -56,7 +56,7 @@ try:
                         for i in range (1, len(all_rows)):
                             # prepare query data for db
                             query_data = {
-                                "variant_id": idx,
+                                "variant_id": 'UUID()',
                                 "CHROM": None,
                                 "POS": None,
                                 "REF": None,
@@ -75,13 +75,12 @@ try:
                                 "Franklin_link": None
                             }
 
-                            print(f"row {i}:")
+                            # print(f"row {i}:")
                             j = 0
                             variant_string = ""
                             for cell in all_rows[i]:
                                 current = all_rows[0][j].value
 
-                                # ASSUMPTION: all empty cells and those with '.' char imply NULL
                                 if cell.value == '.':
                                     cell.value = None
                                 # print(f"{current}: {cell.value}, type {type(cell.value)}")
@@ -93,31 +92,22 @@ try:
                                     variant_string += str(cell.value)
 
                             # print(f"DATA FOR DB: {query_data}, total elements: {len(query_data)}")
-                            
-                            # TODO look into concatenating the variant string and making a dictionary of them
-                            # print(f"variant string: {variant_string}")
-                            # if variant_string not in variant_map:
-                            #     variant_map[variant_string] = 0
-                            # else: variant_map[variant_string] += 1
-
-                            query_data["variant_id"] = idx
-                            idx += 1
 
                             query = ("INSERT INTO gen_info "
                                     "(variant_id, CHROM, POS, REF, ALT, VAF, GT, DP, GENE, FEATURE_ID, "
                                     "EFFECT, HGVS_C, HGVS_P, ClinVar, ClinVarCONF, Varsome_link, Franklin_link) "
-                                    "VALUES (%(variant_id)s, %(CHROM)s, %(POS)s, %(REF)s, %(ALT)s, %(VAF)s, %(GT)s,"
+                                    "VALUES (uuid(), %(CHROM)s, %(POS)s, %(REF)s, %(ALT)s, %(VAF)s, %(GT)s,"
                                     " %(DP)s, %(GENE)s, %(FEATURE_ID)s, %(EFFECT)s, %(HGVS_C)s, %(HGVS_P)s, %(ClinVar)s,"
                                     " %(ClinVarCONF)s, %(Varsome_link)s, %(Franklin_link)s)") 
                             
                             cursor.execute(query, query_data)
                             connection.commit()
-                            print('\n')
-            print(variant_map)
+                            # print('\n')
+            # print(variant_map)
             cursor.close()
 
 except Error as e:
-    print("error connecting to database:", e)
+    print("error connecting to database |", e)
 
 finally:
     if connection:
@@ -125,3 +115,8 @@ finally:
             cursor.close()
             connection.close()
             print("connection terminated")
+
+
+# Qs FOR MEETING
+# what kind of pk are we looking for HASH
+# some doubts about format of the cells (e.g. null values)
