@@ -3,120 +3,112 @@ from openpyxl import load_workbook
 import mysql.connector
 from mysql.connector import Error
 
-connection = None
-path = "../esempio_dati"
+path = "../esempio_dati" # this should be a parameter
 dir_list = list(os.listdir(path))
-idx = 0 # temporary index as primary key for the db
-variant_map = {}
+connection = None
 
 try: 
     connection = mysql.connector.connect(host='localhost',
                          database='4evar_test',
                          user='root',
-                         password='PassMass123!')
+                         password='PassMass123!') # user and password should be parameters
 
-    if connection:
-        if connection.is_connected():
-            
-            db_Info = connection.get_server_info()
-            print("connected to server ", db_Info)
+    if connection and connection.is_connected():
+        db_info = connection.get_server_info()
+        print("connected to server ", db_info)
 
-            cursor = connection.cursor()
-            cursor.execute("select database();")
+        cursor = connection.cursor()
+        cursor.execute("select database();")
 
-            record = cursor.fetchone()
-            print("connected to database ", record)
-            for dir in dir_list:
-                new_p = path + '/' + dir
-                folder = os.listdir(new_p)
-                for file in folder:
-                    if file.endswith(".xlsx"):
+        record = cursor.fetchone()
+        print("connected to database ", record)
 
-                        data_file = path + '/' + dir +'/' + file
-                        print("current file:", data_file, '\n')
+        for dir in dir_list:
+            new_p = path + '/' + dir
+            folder = os.listdir(new_p)
+            for file in folder:
+                if file.endswith(".xlsx"):
+                    
+        # ---------- POSSIBLY EXTRACT THIS AS A SEPARATE FUNCTION ----------
+                    data_file = path + '/' + dir + '/' + file
+                    print("current file:", data_file)
+                    
+                    wb = load_workbook(data_file) # Load the entire workbook
+                    ws = wb['Sheet1'] # Load the worksheet.
+
+                    all_rows = list(ws.rows)
+                    all_cols = list(ws.columns)
+                    # print(f"found {len(all_rows)} variants in this file\n")
+
+                    # correct local spelling to work with SQL syntax
+                    for i in range(len(all_rows[0])):
+                        if all_rows[0][i].value == "FEATURE ID":
+                            all_rows[0][i].value = "FEATURE_ID"
+                        elif all_rows[0][i].value == "Varsome link":
+                            all_rows[0][i].value = "Varsome_link"
+                        elif all_rows[0][i].value == "Franklin link":
+                            all_rows[0][i].value = "Franklin_link"
+
+                    for i in range (1, len(all_rows)):
+                        # prepare query data for db
+                        query_data = {
+                            "variant_id": None,
+                            "VAR_STRING": None,
+                            "CHROM": None,
+                            "POS": None,
+                            "REF": None,
+                            "ALT": None,
+                            "VAF": None,
+                            "GT": None,
+                            "DP": None,
+                            "GENE": None,
+                            "FEATURE_ID": None,
+                            "EFFECT": None,
+                            "HGVS_C": None,
+                            "HGVS_P": None,
+                            "ClinVar": None,
+                            "ClinVarCONF": None,
+                            "Varsome_link": None,
+                            "Franklin_link": None
+                        }
+
+                        j = 0
+                        variant_string = ""
+                        for cell in all_rows[i]:
+                            current = all_rows[0][j].value # the column name
+
+                            if cell.value == '.':
+                                cell.value = None
+
+                            # print(f"{current}: {cell.value}}")
+                            query_data[current] = cell.value
+                            j += 1
+
+                            if (current == "CHROM" or current == "REF"):
+                                variant_string += cell.value
+                            elif (current == "POS" or current == "ALT"):
+                                variant_string += str(cell.value)
+
+                        query_data["VAR_STRING"] = variant_string
+
+                        query = ("INSERT INTO gen_info "
+                                "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, VAF, GT, DP, GENE, FEATURE_ID, "
+                                "EFFECT, HGVS_C, HGVS_P, ClinVar, ClinVarCONF, Varsome_link, Franklin_link) "
+                                "VALUES (uuid(), %(VAR_STRING)s, %(CHROM)s, %(POS)s, %(REF)s, %(ALT)s, %(VAF)s, %(GT)s,"
+                                " %(DP)s, %(GENE)s, %(FEATURE_ID)s, %(EFFECT)s, %(HGVS_C)s, %(HGVS_P)s, %(ClinVar)s,"
+                                " %(ClinVarCONF)s, %(Varsome_link)s, %(Franklin_link)s)") 
                         
-                        # Load the entire workbook
-                        wb = load_workbook(data_file)
-
-                        # Load the worksheet
-                        ws = wb['Sheet1']
-                        all_rows = list(ws.rows)
-                        all_cols = list(ws.columns)
-                        print(f"found {len(all_rows)} variants in this file")
-
-                        # correct local spelling to work with SQL syntax
-                        for i in range(len(all_rows[0])):
-                            if all_rows[0][i].value == "FEATURE ID":
-                                all_rows[0][i].value = "FEATURE_ID"
-                            elif all_rows[0][i].value == "Varsome link":
-                                all_rows[0][i].value = "Varsome_link"
-                            elif all_rows[0][i].value == "Franklin link":
-                                all_rows[0][i].value = "Franklin_link"
-
-                        for i in range (1, len(all_rows)):
-                            # prepare query data for db
-                            query_data = {
-                                "variant_id": 'UUID()',
-                                "CHROM": None,
-                                "POS": None,
-                                "REF": None,
-                                "ALT": None,
-                                "VAF": None,
-                                "GT": None,
-                                "DP": None,
-                                "GENE": None,
-                                "FEATURE_ID": None,
-                                "EFFECT": None,
-                                "HGVS_C": None,
-                                "HGVS_P": None,
-                                "ClinVar": None,
-                                "ClinVarCONF": None,
-                                "Varsome_link": None,
-                                "Franklin_link": None
-                            }
-
-                            # print(f"row {i}:")
-                            j = 0
-                            variant_string = ""
-                            for cell in all_rows[i]:
-                                current = all_rows[0][j].value
-
-                                if cell.value == '.':
-                                    cell.value = None
-                                # print(f"{current}: {cell.value}, type {type(cell.value)}")
-                                query_data[current] = cell.value
-                                j += 1
-                                if (cell.value == None):
-                                    variant_string += "."
-                                else:
-                                    variant_string += str(cell.value)
-
-                            # print(f"DATA FOR DB: {query_data}, total elements: {len(query_data)}")
-
-                            query = ("INSERT INTO gen_info "
-                                    "(variant_id, CHROM, POS, REF, ALT, VAF, GT, DP, GENE, FEATURE_ID, "
-                                    "EFFECT, HGVS_C, HGVS_P, ClinVar, ClinVarCONF, Varsome_link, Franklin_link) "
-                                    "VALUES (uuid(), %(CHROM)s, %(POS)s, %(REF)s, %(ALT)s, %(VAF)s, %(GT)s,"
-                                    " %(DP)s, %(GENE)s, %(FEATURE_ID)s, %(EFFECT)s, %(HGVS_C)s, %(HGVS_P)s, %(ClinVar)s,"
-                                    " %(ClinVarCONF)s, %(Varsome_link)s, %(Franklin_link)s)") 
-                            
-                            cursor.execute(query, query_data)
-                            connection.commit()
-                            # print('\n')
-            # print(variant_map)
-            cursor.close()
+                        cursor.execute(query, query_data)
+                        connection.commit()
+        #  ------------------------------------------------------------               
+        cursor.close()
 
 except Error as e:
-    print("error connecting to database |", e)
+    print("Error connecting to database |", e)
 
 finally:
     if connection:
         if connection.is_connected():
             cursor.close()
             connection.close()
-            print("connection terminated")
-
-
-# Qs FOR MEETING
-# what kind of pk are we looking for HASH
-# some doubts about format of the cells (e.g. null values)
+            print("Connection terminated")
