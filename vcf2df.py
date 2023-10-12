@@ -120,6 +120,7 @@ try:
                                     "Franklin_link": None
                                 }
                                 
+                                # populate the query_data structure
                                 j = 0
                                 for cell in all_rows[i]:
                                     current = all_rows[0][j].value # the column name
@@ -132,8 +133,6 @@ try:
 
 
                                 query_data["VAR_STRING"] = query_info["VAR_STRING"]
-
-                                print("query data for sql:",query_data)
 
                                 query = ("INSERT INTO gen_info "
                                         "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, VAF, GT, DP, GENE, FEATURE_ID, "
@@ -158,6 +157,3 @@ finally:
             cursor.close()
             connection.close()
             print("Connection terminated")
-
-
-H1 = "chr116272250AG"
