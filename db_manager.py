@@ -104,7 +104,7 @@ try:
         cursor.close()
 
 except Error as e:
-    print("Error connecting to database |", e)
+    print("Error connecting to database,", e)
 
 finally:
     if connection:

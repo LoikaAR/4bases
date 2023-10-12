@@ -5,6 +5,7 @@ from mysql.connector import Error
 from openpyxl import load_workbook
 
 connection = None
+# those will be variables depending on how the checking will be done
 file = "CARDIOPRO-CQ1-AA33.vcf"
 path = '../esempio_dati/CARDIOPRO-CQ1-AA33/'+file
 
@@ -27,19 +28,18 @@ try:
                     header = line.strip('#').strip().split('\t')
                     break
 
-
         data = pd.read_csv(path, sep ='\t', skiprows=i, header=None)
         data.columns = header
 
         target_data = data[['CHROM', 'POS', 'REF', 'ALT']]
         n_rows = target_data.shape[0]
         n_cols = target_data.shape[1]
-        # print("ILOC:",target_data.iloc[0,3])
 
         # loop that extracts the variant strings
         for row in range(1, n_rows):
             extracted_info = {"CHROM": None, "REF": None, "POS": None, "ALT": None} # for lookup later
             query_info = {"VAR_STRING": ""}
+
             for col in range(0, n_cols):
                 query_info['VAR_STRING'] += str(target_data.iloc[row, col])
 
@@ -53,11 +53,14 @@ try:
                 elif target_data.iloc[0,col] == "ALT":
                     extracted_info["ALT"] = target_data.iloc[row, col]
 
-            query = "SELECT variant_id FROM gen_info WHERE VAR_STRING = 'chr116270000AG'" # possible flaw
+            query = "SELECT variant_id FROM gen_info WHERE VAR_STRING = %(VAR_STRING)s" # possible flaw in concatenation
+
             cursor.execute(query, query_info)
             res = cursor.fetchall()
+
             if res == []:
                 print("Variant not found, inserting into db")
+
                 # ASSUMPTION: the excel file is in the same folder as the .vcf file
                 new_path = path.replace(file, '')
                 folder = os.listdir(new_path)
@@ -73,6 +76,7 @@ try:
                         all_rows = list(ws.rows)
                         all_cols = list(ws.columns)
 
+                        # normalize for SQL
                         for i in range(len(all_rows[0])):
                             if all_rows[0][i].value == "FEATURE ID":
                                 all_rows[0][i].value = "FEATURE_ID"
@@ -80,29 +84,20 @@ try:
                                 all_rows[0][i].value = "Varsome_link"
                             elif all_rows[0][i].value == "Franklin link":
                                 all_rows[0][i].value = "Franklin_link"
-                        # DOES NOT WORK
+
+                        # look for a match in the workbook
                         for i in range (1, len(all_rows)):
-                            
                             chrom_val = all_rows[i][0].value
-                            pos_val = all_rows[i][1].value
+                            pos_val = str(all_rows[i][1].value) # this gets parsed as an int so needs typecasting
                             ref_val = all_rows[i][2].value
                             alt_val = all_rows[i][3].value
 
+                            # if a match is found
                             if chrom_val == extracted_info["CHROM"]      \
                                     and pos_val == extracted_info["POS"] \
                                     and ref_val == extracted_info["REF"] \
                                     and alt_val == extracted_info["ALT"]:
                                     
-                                j = 0
-                                for cell in all_rows[i]:
-                                    current = all_rows[0][j].value # the column name
-
-                                    if cell.value == '.':
-                                        cell.value = None
-
-                                    query_data[current] = cell.value
-                                    j += 1
-
                                 # prepare query data for db
                                 query_data = {
                                     "variant_id": None,
@@ -124,8 +119,21 @@ try:
                                     "Varsome_link": None,
                                     "Franklin_link": None
                                 }
+                                
+                                j = 0
+                                for cell in all_rows[i]:
+                                    current = all_rows[0][j].value # the column name
+
+                                    if cell.value == '.':
+                                        cell.value = None
+
+                                    query_data[current] = cell.value
+                                    j += 1
+
 
                                 query_data["VAR_STRING"] = query_info["VAR_STRING"]
+
+                                print("query data for sql:",query_data)
 
                                 query = ("INSERT INTO gen_info "
                                         "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, VAF, GT, DP, GENE, FEATURE_ID, "
@@ -136,11 +144,13 @@ try:
                                 
                                 cursor.execute(query, query_data)
                                 connection.commit()
+                            else:
+                                print("variants not matching")
             else:
-                print("FOUND")
+                print(f"variant {query_info['VAR_STRING']} already present")
 
 except Error as e:
-    print("Error connecting to database |", e)
+    print("Error connecting to database,", e)
 
 finally:
     if connection:
