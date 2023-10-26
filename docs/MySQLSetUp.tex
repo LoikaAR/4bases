@@ -1,0 +1,87 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+%\documentclass[a4paper,10pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\title{4eVAR Local MySQL Set Up Instructions}
+\author{}
+\date{}
+
+\pdfinfo{%
+  /Title    (MySQL Set Up Instructions)
+  /Author   ()
+  /Creator  ()
+  /Producer ()
+  /Subject  ()
+  /Keywords ()
+}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+ \item Enter MySQL and run the following commands:
+ 
+\begin{verbatim}
+
+-- create and select the db --
+CREATE DATABASE 4evar_test;
+USE 4evar_test;
+
+-- create table --
+CREATE TABLE gen_info (
+    variant_id VARCHAR(36) PRIMARY KEY,
+    VAR_STRING VARCHAR(100) NOT NULL,
+    CHROM CHAR(5) NOT NULL, 
+    POS INT NOT NULL,
+    REF VARCHAR(100) NOT NULL, 
+    ALT VARCHAR(50) NOT NULL,
+    VAF DECIMAL(7, 6), 
+    GT VARCHAR(10),
+    DP INT,
+    GENE VARCHAR(100), 
+    FEATURE_ID CHAR(20), 
+    EFFECT VARCHAR(100), 
+    HGVS_C VARCHAR(200), 
+    HGVS_P VARCHAR(100), 
+    ClinVar VARCHAR(500),
+    ClinVarCONF VARCHAR(500),
+    Varsome_link VARCHAR(500) NOT NULL, 
+    Franklin_link VARCHAR(500) NOT NULL
+);
+
+-- after this, running this command:
+
+SHOW TABLES;
+
+-- should produce this result:
+
++----------------------+
+| Tables_in_4evar_test |
++----------------------+
+| gen_info             |
++----------------------+
+
+\end{verbatim}
+
+
+ \item The user is set to "root" by default, so it should work straight away. If it does not, run the following commands:
+ 
+ \begin{verbatim}
+
+ALTER USER 'root'@'localhost'
+IDENTIFIED WITH caching_sha2_password BY 'PassMass123!';
+  
+ \end{verbatim}
+
+ 
+ 
+\end{enumerate}
+
+
+
+
+
+\end{document}

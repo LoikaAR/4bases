@@ -1,9 +1,10 @@
 import os
+import sys
 from openpyxl import load_workbook
 import mysql.connector
 from mysql.connector import Error
 
-path = "../esempio_dati" # this should be a parameter
+path = str(sys.argv[1]) # the location of the files
 dir_list = list(os.listdir(path))
 connection = None
 
@@ -25,11 +26,13 @@ try:
 
         for dir in dir_list:
             new_p = path + '/' + dir
-            folder = os.listdir(new_p)
+            folder = list(os.listdir(new_p))
+            
+            # target = [i for i in folder if ".xlsx" in i]
+            # file = target[0]
+
             for file in folder:
                 if file.endswith(".xlsx"):
-                    
-        # ---------- POSSIBLY EXTRACT THIS AS A SEPARATE FUNCTION ----------
                     data_file = path + '/' + dir + '/' + file
                     print("current file:", data_file)
                     
@@ -85,7 +88,7 @@ try:
                             j += 1
 
                             if (current == "CHROM" or current == "REF"):
-                                variant_string += cell.value
+                                variant_string += str(cell.value)
                             elif (current == "POS" or current == "ALT"):
                                 variant_string += str(cell.value)
 
@@ -100,7 +103,6 @@ try:
                         
                         cursor.execute(query, query_data)
                         connection.commit()
-        #  ------------------------------------------------------------               
         cursor.close()
 
 except Error as e:

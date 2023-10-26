@@ -1,4 +1,5 @@
 import os
+import csv
 import pandas as pd
 import mysql.connector
 from mysql.connector import Error
@@ -28,12 +29,19 @@ try:
                     header = line.strip('#').strip().split('\t')
                     break
 
+        # read the csv file
         data = pd.read_csv(path, sep ='\t', skiprows=i, header=None)
         data.columns = header
-
         target_data = data[['CHROM', 'POS', 'REF', 'ALT']]
         n_rows = target_data.shape[0]
         n_cols = target_data.shape[1]
+
+        # prepare the tsv file for existing variants
+        out_file = open("existing.tsv", "a")
+        tsv_writer = csv.writer(out_file, delimiter='\t')
+        col_names = ["variant_id", "VAR_STRING", "CHROM", "POS", "REF", "ALT", "VAF", "GT", "DP", "GENE", "FEATURE_ID",
+                                "EFFECT", "HGVS_C", "HGVS_P", "ClinVar", "ClinVarCONF", "Varsome_link", "Franklin_link"]
+        tsv_writer.writerow(col_names)            
 
         # loop that extracts the variant strings
         for row in range(1, n_rows):
@@ -44,6 +52,7 @@ try:
                 query_info['VAR_STRING'] += str(target_data.iloc[row, col])
 
                 # separate pieces of data for lookup in excel files 
+                # i.e. comparison will be done by those 4
                 if target_data.iloc[0,col] == "#CHROM":
                     extracted_info["CHROM"] = target_data.iloc[row, col]
                 elif target_data.iloc[0,col] == "REF":
@@ -53,10 +62,11 @@ try:
                 elif target_data.iloc[0,col] == "ALT":
                     extracted_info["ALT"] = target_data.iloc[row, col]
 
-            query = "SELECT variant_id FROM gen_info WHERE VAR_STRING = %(VAR_STRING)s" # possible flaw in concatenation
+            query = "SELECT * FROM gen_info WHERE VAR_STRING = %(VAR_STRING)s" # possible flaw in concatenation
 
             cursor.execute(query, query_info)
             res = cursor.fetchall()
+
 
             if res == []:
                 print("Variant not found, inserting into db")
@@ -146,7 +156,14 @@ try:
                             else:
                                 print("variants not matching")
             else:
-                print(f"variant {query_info['VAR_STRING']} already present")
+                # append the already present file to a .tsv file 
+                print(f"variant {query_info['VAR_STRING']} already present, writing into tsv")
+
+                formatted_res = [list(i) for i in res] # res returns a list of tuples by default, needs to be list of lists
+
+                for row in formatted_res:
+                    tsv_writer.writerow(row)
+
 
 except Error as e:
     print("Error connecting to database,", e)
