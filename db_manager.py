@@ -1,5 +1,6 @@
 import os
 import sys
+import uuid
 from openpyxl import load_workbook
 import mysql.connector
 from mysql.connector import Error
@@ -18,7 +19,7 @@ try:
         db_info = connection.get_server_info()
         print("connected to server ", db_info)
 
-        cursor = connection.cursor()
+        cursor = connection.cursor(buffered=True) # buffered prevents unread result error 
         cursor.execute("select database();")
 
         record = cursor.fetchone()
@@ -28,81 +29,102 @@ try:
             new_p = path + '/' + dir
             folder = list(os.listdir(new_p))
             
-            # target = [i for i in folder if ".xlsx" in i]
-            # file = target[0]
+            # get the excel file
+            target = [i for i in folder if ".xlsx" in i]
+            file = target[0]
 
-            for file in folder:
-                if file.endswith(".xlsx"):
-                    data_file = path + '/' + dir + '/' + file
-                    print("current file:", data_file)
+            data_file = path + '/' + dir + '/' + file
+            print("current file:", data_file)
+            
+            wb = load_workbook(data_file) # Load the entire workbook
+            ws = wb['Sheet1'] # Load the worksheet.
+
+            all_rows = list(ws.rows)
+            all_cols = list(ws.columns)
+            # print(f"found {len(all_rows)} variants in this file\n")
+
+            # remove whitespaces to work with MySQL syntax
+            for i in range(len(all_rows[0])):
+                if all_rows[0][i].value.find(" ") != -1:
+                    all_rows[0][i].value = "_".join(all_rows[0][i].value.split())
+
+            for i in range (1, len(all_rows)):
+                # variant_id = str(uuid.uuid4())
+                # sample_id = str(uuid.uuid4())
+
+                # prepare query data for db
+                query_data_variant = {
+                    "variant_id": None,
+                    "VAR_STRING": None,
+                    "CHROM": None,
+                    "POS": None,
+                    "REF": None,
+                    "ALT": None,
+                    "GENE": None,
+                    "FEATURE_ID": None,
+                    "EFFECT": None,
+                    "HGVS_C": None,
+                    "HGVS_P": None,
+                    "ClinVar": None,
+                    "ClinVarCONF": None,
+                    "Varsome_link": None,
+                    "Franklin_link": None
+                }
+
+                query_data_sample = {
+                    "sample_id": None,
+                    "VAF": None,
+                    "GT": None,
+                    "DP": None
+                }
+
+                query_data_instance = {
+                    "variant_id": None,
+                    "sample_id": None
+                }
+
+                j = 0
+                variant_string = ""
+                for cell in all_rows[i]:
+                    current = all_rows[0][j].value # the column name
+
+                    if cell.value == '.': # assuming "." is equal to NULL
+                        cell.value = None
+
+                    if current == "VAF" or current == "GT" or current == "DP":
+                        query_data_sample[current] = cell.value
+                    else :
+                        # print(f"{current}: {cell.value}}")
+                        query_data_variant[current] = cell.value
+
+                        if (current == "CHROM" or current == "REF"):
+                            variant_string += str(cell.value)
+                        elif (current == "POS" or current == "ALT"):
+                            variant_string += str(cell.value)
                     
-                    wb = load_workbook(data_file) # Load the entire workbook
-                    ws = wb['Sheet1'] # Load the worksheet.
+                    query_data_variant["VAR_STRING"] = variant_string
+                    j += 1
 
-                    all_rows = list(ws.rows)
-                    all_cols = list(ws.columns)
-                    # print(f"found {len(all_rows)} variants in this file\n")
+                cursor.execute("SET @var_id = uuid()")
+                cursor.execute("SET @sam_id = uuid()")
 
-                    # correct local spelling to work with SQL syntax
-                    for i in range(len(all_rows[0])):
-                        if all_rows[0][i].value == "FEATURE ID":
-                            all_rows[0][i].value = "FEATURE_ID"
-                        elif all_rows[0][i].value == "Varsome link":
-                            all_rows[0][i].value = "Varsome_link"
-                        elif all_rows[0][i].value == "Franklin link":
-                            all_rows[0][i].value = "Franklin_link"
+                query_variant = (
+                        "INSERT INTO variant "
+                        "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, GENE, FEATURE_ID, "
+                        "EFFECT, HGVS_C, HGVS_P, ClinVar, ClinVarCONF, Varsome_link, Franklin_link) "
+                        "VALUES (@var_id, %(VAR_STRING)s, %(CHROM)s, %(POS)s, %(REF)s, %(ALT)s, %(GENE)s,"
+                        " %(FEATURE_ID)s, %(EFFECT)s, %(HGVS_C)s, %(HGVS_P)s, %(ClinVar)s, %(ClinVarCONF)s,"
+                        " %(Varsome_link)s, %(Franklin_link)s)")
+                cursor.execute(query_variant, query_data_variant)
 
-                    for i in range (1, len(all_rows)):
-                        # prepare query data for db
-                        query_data = {
-                            "variant_id": None,
-                            "VAR_STRING": None,
-                            "CHROM": None,
-                            "POS": None,
-                            "REF": None,
-                            "ALT": None,
-                            "VAF": None,
-                            "GT": None,
-                            "DP": None,
-                            "GENE": None,
-                            "FEATURE_ID": None,
-                            "EFFECT": None,
-                            "HGVS_C": None,
-                            "HGVS_P": None,
-                            "ClinVar": None,
-                            "ClinVarCONF": None,
-                            "Varsome_link": None,
-                            "Franklin_link": None
-                        }
+                query_sample = ("INSERT INTO sample "
+                                "(sample_id, VAF, GT, DP) VALUES (@sam_id, %(VAF)s, %(GT)s, %(DP)s)")
+                cursor.execute(query_sample, query_data_sample)
 
-                        j = 0
-                        variant_string = ""
-                        for cell in all_rows[i]:
-                            current = all_rows[0][j].value # the column name
+                query_instance = ("INSERT INTO instance(variant_id, sample_id) VALUES (@var_id, @sam_id)")
+                cursor.execute(query_instance, query_data_instance)
 
-                            if cell.value == '.':
-                                cell.value = None
-
-                            # print(f"{current}: {cell.value}}")
-                            query_data[current] = cell.value
-                            j += 1
-
-                            if (current == "CHROM" or current == "REF"):
-                                variant_string += str(cell.value)
-                            elif (current == "POS" or current == "ALT"):
-                                variant_string += str(cell.value)
-
-                        query_data["VAR_STRING"] = variant_string
-
-                        query = ("INSERT INTO gen_info "
-                                "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, VAF, GT, DP, GENE, FEATURE_ID, "
-                                "EFFECT, HGVS_C, HGVS_P, ClinVar, ClinVarCONF, Varsome_link, Franklin_link) "
-                                "VALUES (uuid(), %(VAR_STRING)s, %(CHROM)s, %(POS)s, %(REF)s, %(ALT)s, %(VAF)s, %(GT)s,"
-                                " %(DP)s, %(GENE)s, %(FEATURE_ID)s, %(EFFECT)s, %(HGVS_C)s, %(HGVS_P)s, %(ClinVar)s,"
-                                " %(ClinVarCONF)s, %(Varsome_link)s, %(Franklin_link)s)") 
-                        
-                        cursor.execute(query, query_data)
-                        connection.commit()
+                connection.commit()
         cursor.close()
 
 except Error as e:
@@ -113,4 +135,4 @@ finally:
         if connection.is_connected():
             cursor.close()
             connection.close()
-            print("Connection terminated")
+            print("Connection closed")

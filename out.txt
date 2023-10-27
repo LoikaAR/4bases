@@ -1,28 +1,17 @@
 connected to server  8.0.34-0ubuntu0.20.04.1
 connected to database  ('4evar_test',)
-current file: ../ClinexWES_variants/3/CLINEX_NA12878_CQ11_ann.xlsx
-current file: ../ClinexWES_variants/8/WES_MITO_NA12878_CQ12_ann.xlsx
-current file: ../ClinexWES_variants/2/ClinEX_CQSONDA263_ann.xlsx
-current file: ../ClinexWES_variants/11/WES_T03_OSM_ann.xlsx
-current file: ../ClinexWES_variants/9/WES_T01_OSM_ann.xlsx
-current file: ../ClinexWES_variants/4/WES_C01_TESS_CARDIACO_CQ7_ann.xlsx
-current file: ../ClinexWES_variants/12/WES_T04_OSM_ann.xlsx
-current file: ../ClinexWES_variants/7/WES_C04_TESS_CARDIACO_CQ7_ann.xlsx
-current file: ../ClinexWES_variants/10/WES_T02_OSM_ann.xlsx
-Error connecting to database, 1406 (22001): Data too long for column 'EFFECT' at row 1
-Connection terminated
-connected to server  8.0.34-0ubuntu0.20.04.1
-connected to database  ('4evar_test',)
-current file: ../ClinexWES_variants/3/CLINEX_NA12878_CQ11_ann.xlsx
-current file: ../ClinexWES_variants/8/WES_MITO_NA12878_CQ12_ann.xlsx
-current file: ../ClinexWES_variants/2/ClinEX_CQSONDA263_ann.xlsx
-current file: ../ClinexWES_variants/11/WES_T03_OSM_ann.xlsx
-current file: ../ClinexWES_variants/9/WES_T01_OSM_ann.xlsx
-current file: ../ClinexWES_variants/4/WES_C01_TESS_CARDIACO_CQ7_ann.xlsx
-current file: ../ClinexWES_variants/12/WES_T04_OSM_ann.xlsx
-current file: ../ClinexWES_variants/7/WES_C04_TESS_CARDIACO_CQ7_ann.xlsx
-current file: ../ClinexWES_variants/10/WES_T02_OSM_ann.xlsx
-current file: ../ClinexWES_variants/1/Clinex_CQ14_ann.xlsx
-current file: ../ClinexWES_variants/5/WES_C02_TESS_CARDIACO_CQ7_ann.xlsx
-current file: ../ClinexWES_variants/6/WES_C03_TESS_CARDIACO_CQ7_ann.xlsx
+current file: ../esempio_dati/CARDIOPRO-CQ1-NA07441/CARDIOPRO-CQ1-NA07441_ann.xlsx
+current file: ../esempio_dati/BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107/BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107_ann.xlsx
+current file: ../esempio_dati/BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107/BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107_ann.xlsx
+current file: ../esempio_dati/CARDIOPRO-CQ1-AA32/CARDIOPRO-CQ1-AA32_ann.xlsx
+current file: ../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33_ann.xlsx
+current file: ../esempio_dati/HEVA_Nanopore_HD793_5min_37_5cyc/HEVA_Nanopore_HD793_5min_37_5cyc_ann.xlsx
+current file: ../esempio_dati/BRCAPANEL_HD793_CQ242_CQPOOL/BRCAPANEL_HD793_CQ242_CQPOOL_ann.xlsx
+current file: ../esempio_dati/HEVA_Nanopore_AA040_5min_37_5cyc/HEVA_Nanopore_AA040_5min_37_5cyc_ann.xlsx
+current file: ../esempio_dati/HEVA_Nanopore_HD829_5min_37_5cyc/HEVA_Nanopore_HD829_5min_37_5cyc_ann.xlsx
+current file: ../esempio_dati/HEVA_Nanopore_HD794_5min_37_5cyc/HEVA_Nanopore_HD794_5min_37_5cyc_ann.xlsx
+current file: ../esempio_dati/CARDIOPRO-CQ1-HD793/CARDIOPRO-CQ1-HD793_ann.xlsx
+current file: ../esempio_dati/HEVA_Nanopore_HD793/HEVA_Nanopore_HD793_ann.xlsx
+current file: ../esempio_dati/BRCAPANEL_AA053_CQ242_CQPOOL/BRCAPANEL_AA053_CQ242_CQPOOL_ann.xlsx
+current file: ../esempio_dati/HEVA_Nanopore_HD794/HEVA_Nanopore_HD794_ann.xlsx
 Connection terminated
