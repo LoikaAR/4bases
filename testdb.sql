@@ -8,6 +8,7 @@ CREATE TABLE variant (
     REF VARCHAR(100) NOT NULL, 
     ALT VARCHAR(50) NOT NULL,
     GENE VARCHAR(300), 
+    ACMG VARCHAR(100),
     FEATURE_ID VARCHAR(300), 
     EFFECT VARCHAR(300), 
     HGVS_C VARCHAR(300), 
@@ -20,9 +21,11 @@ CREATE TABLE variant (
 
 CREATE TABLE sample (
     sample_id VARCHAR(36) PRIMARY KEY,
+    file_name VARCHAR(500),
     VAF DECIMAL(7, 6), 
-    GT VARCHAR(50),
-    DP INT
+    GT INT,
+    DP INT,
+    RELIABLE BOOLEAN
 );
 
 CREATE TABLE instance (

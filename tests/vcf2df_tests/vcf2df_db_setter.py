@@ -10,6 +10,7 @@ DP_THRESHOLD = 20
 
 def vcf_scraper(file_path):
     file_name = file_path.split('/')[-1]
+    path = '../esempio_dati/CARDIOPRO-CQ1-AA33/'+file_name
     try:
         connection = mysql.connector.connect(host='localhost',
                                             database='4evar_test',
@@ -88,7 +89,7 @@ def vcf_scraper(file_path):
                     rows = list(ws.rows)
                     cols = list(ws.columns)
 
-                    # remove spaces in column names to make it work for SQL
+                    # remove spaces in column names to make it work for MySQL
                     for i in range(len(rows[0])):
                         if rows[0][i].value.find(" ") != -1:
                             rows[0][i].value = "_".join(rows[0][i].value.split())
@@ -147,7 +148,7 @@ def vcf_scraper(file_path):
                                 
                                 if cell.value == '.':
                                     cell.value = None
-
+                               
 
                                 if current == "VAF":
                                     query_data_sample[current] = cell.value
@@ -168,11 +169,13 @@ def vcf_scraper(file_path):
                                     elif (current == "POS" or current == "ALT"):
                                         variant_string += str(cell.value)
 
-                                query_data_variant["VAR_STRING"] = query_info["VAR_STRING"]
                                 j += 1
+                                query_data_variant["VAR_STRING"] = query_info["VAR_STRING"]
+                                query_data_variant["VAR_STRING"] += "FOUND"
 
                             cursor.execute("SET @var_id = uuid()")
                             cursor.execute("SET @sam_id = uuid()")
+
 
                             query_variant = (
                                     "INSERT INTO variant "
@@ -197,8 +200,8 @@ def vcf_scraper(file_path):
                             cursor.execute(query_instance, query_data_instance)
                             
                             connection.commit()
-                        # else:
-                        #     print("variants not matching")
+                        else:
+                            print("variants not matching")
                 else:
                     # append the already present file to a .tsv file 
                     print(f"variant {query_info['VAR_STRING']} already present, writing into tsv")
@@ -220,7 +223,7 @@ def vcf_scraper(file_path):
 
 
 def main():
-    path = "../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33.vcf"
+    path = "../../../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33.vcf"
     vcf_scraper(path)
 
 main()

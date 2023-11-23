@@ -6,10 +6,10 @@ from mysql.connector import Error
 from openpyxl import load_workbook
 
 connection = None                   # prepare the connection
-DP_THRESHOLD = 20
 
 def vcf_scraper(file_path):
     file_name = file_path.split('/')[-1]
+    path = '../esempio_dati/CARDIOPRO-CQ1-AA33/'+file_name
     try:
         connection = mysql.connector.connect(host='localhost',
                                             database='4evar_test',
@@ -72,7 +72,7 @@ def vcf_scraper(file_path):
 
                 # if variant is not found in the db:
                 if res == []:
-                    print("Variant not found in vcf file - scraping excel file and inserting into db")
+                    print(f"Variant {query_info['VAR_STRING']} not found in vcf file - scraping excel file and inserting into db")
 
                     # ASSUMPTION: the excel file is in the same folder as the .vcf file
                     new_path = file_path.replace(file_name, '')          # strip path of the vcf file
@@ -147,29 +147,21 @@ def vcf_scraper(file_path):
                                 
                                 if cell.value == '.':
                                     cell.value = None
-
-
-                                if current == "VAF":
+                                
+                                if current == "VAF" or current == "GT" or current == "DP":
                                     query_data_sample[current] = cell.value
-                                elif current == "DP":
-                                    query_data_sample[current] = cell.value
-                                    query_data_sample["RELIABLE"] = True if cell.value != None and int(cell.value) > DP_THRESHOLD else False
-                                elif current == "GT":
-                                    if cell.value == "het":
-                                        query_data_sample[current] = 1
-                                    elif cell.value == "hom":
-                                        query_data_sample[current] = 2
-
-                                else:
+                                else :
                                     # print(f"{current}: {cell.value}}")
                                     query_data_variant[current] = cell.value
+
                                     if (current == "CHROM" or current == "REF"):
                                         variant_string += str(cell.value)
                                     elif (current == "POS" or current == "ALT"):
                                         variant_string += str(cell.value)
-
-                                query_data_variant["VAR_STRING"] = query_info["VAR_STRING"]
+                                        query_data_variant[current] = cell.value
+                            
                                 j += 1
+                                query_data_variant["VAR_STRING"] = query_info["VAR_STRING"]
 
                             cursor.execute("SET @var_id = uuid()")
                             cursor.execute("SET @sam_id = uuid()")
@@ -198,7 +190,7 @@ def vcf_scraper(file_path):
                             
                             connection.commit()
                         # else:
-                        #     print("variants not matching")
+                            # print("variants not matching")
                 else:
                     # append the already present file to a .tsv file 
                     print(f"variant {query_info['VAR_STRING']} already present, writing into tsv")
