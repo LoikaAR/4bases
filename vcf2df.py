@@ -5,16 +5,20 @@ import mysql.connector
 from mysql.connector import Error
 from openpyxl import load_workbook
 
-connection = None                   # prepare the connection
-DP_THRESHOLD = 20
+connection = None       # prepare connection
+DP_THRESHOLD = 20       # depth threshold
+
+db_config = {
+    'host': 'localhost',
+    'database': '4evar_test',
+    'user': 'root',
+    'password': 'PassMass123!'
+}
 
 def vcf_scraper(file_path):
     file_name = file_path.split('/')[-1]
     try:
-        connection = mysql.connector.connect(host='localhost',
-                                            database='4evar_test',
-                                            user='root',
-                                            password='PassMass123!')
+        connection = mysql.connector.connect(**db_config)
 
         if connection and connection.is_connected():
             db_info = connection.get_server_info()
@@ -46,9 +50,9 @@ def vcf_scraper(file_path):
             col_names = ["CHROM", "POS", "REF", "ALT", "count"]
             tsv_writer.writerow(col_names)
 
-            # loop that extracts the variant strings
+            # check every row in vcf file
             for row in range(1, n_rows):
-                extracted_info = {"CHROM": None, "REF": None, "POS": None, "ALT": None} # for lookup later
+                extracted_info = {"CHROM": None, "REF": None, "POS": None, "ALT": None}
                 query_info = {"VAR_STRING": ""}
 
                 for col in range(0, n_cols):
@@ -63,19 +67,21 @@ def vcf_scraper(file_path):
                         extracted_info["POS"] = target_data.iloc[row, col]
                     elif target_data.iloc[0,col] == "ALT":
                         extracted_info["ALT"] = target_data.iloc[row, col]
+                
+                vs = query_info["VAR_STRING"]
+                print("extracted var string:", vs)
 
-                print("extracted var string:", query_info["VAR_STRING"])
-                query = "SELECT * FROM variant WHERE VAR_STRING = %(VAR_STRING)s" #  ask about concatenation
+                query_varstring = ("SELECT * FROM variant WHERE VAR_STRING = %(VAR_STRING)s") #  ask about concatenation
 
-                cursor.execute(query, query_info)
+                cursor.execute(query_varstring, query_info)
                 res = cursor.fetchall()
 
-                # if variant is not found in the db:
+                # if variant is not found in the db
                 if res == []:
-                    print("Variant not found in vcf file - scraping excel file and inserting into db")
+                    print("Variant from vcf file not found in db - scraping excel file and inserting into db")
 
                     # ASSUMPTION: the excel file is in the same folder as the .vcf file
-                    new_path = file_path.replace(file_name, '')          # strip path of the vcf file
+                    new_path = file_path.replace(file_name, '')     # strip path of the vcf file
                     folder = os.listdir(new_path)                   # list everything in the directory
                     target = [i for i in folder if ".xlsx" in i]    # find the excel file
                     data_file = new_path + '/' + target[0]          # add it to the path
@@ -126,7 +132,7 @@ def vcf_scraper(file_path):
                                 "Franklin_link": None
                             }
 
-                            query_data_sample = {
+                            query_data_newsam = {
                                 "sample_id": None,
                                 "file_name": file_name,
                                 "VAF": None,
@@ -150,15 +156,15 @@ def vcf_scraper(file_path):
 
 
                                 if current == "VAF":
-                                    query_data_sample[current] = cell.value
+                                    query_data_newsam[current] = cell.value
                                 elif current == "DP":
-                                    query_data_sample[current] = cell.value
-                                    query_data_sample["RELIABLE"] = True if cell.value != None and int(cell.value) > DP_THRESHOLD else False
+                                    query_data_newsam[current] = cell.value
+                                    query_data_newsam["RELIABLE"] = True if cell.value != None and int(cell.value) > DP_THRESHOLD else False
                                 elif current == "GT":
                                     if cell.value == "het":
-                                        query_data_sample[current] = 1
+                                        query_data_newsam[current] = 1
                                     elif cell.value == "hom":
-                                        query_data_sample[current] = 2
+                                        query_data_newsam[current] = 2
 
                                 else:
                                     # print(f"{current}: {cell.value}}")
@@ -189,7 +195,7 @@ def vcf_scraper(file_path):
                                     "(sample_id, file_name, VAF, GT, DP, RELIABLE) VALUES "
                                     "(@sam_id, %(file_name)s, %(VAF)s, %(GT)s, %(DP)s, %(RELIABLE)s)"
                                     )
-                            cursor.execute(query_sample, query_data_sample)
+                            cursor.execute(query_sample, query_data_newsam)
 
                             query_instance = (
                                     "INSERT INTO instance(variant_id, sample_id) VALUES (@var_id, @sam_id)"
@@ -197,16 +203,109 @@ def vcf_scraper(file_path):
                             cursor.execute(query_instance, query_data_instance)
                             
                             connection.commit()
-                        # else:
-                        #     print("variants not matching")
+                            
+                # if variant is found, check sample
                 else:
-                    # append the already present file to a .tsv file 
-                    print(f"variant {query_info['VAR_STRING']} already present, writing into tsv")
+                    db_file_name = [file_name.split('.')[0] + "_ann"]
+                    query_sample_check = ("SELECT s.sample_id FROM sample s JOIN instance i ON s.sample_id = i.sample_id "
+                                    "JOIN variant v ON v.variant_id = i.variant_id WHERE v.VAR_STRING = %(VAR_STRING)s"
+                                    "AND s.file_name = %(db_file_name)s")
+                    
+                    query_sample_check_data = {"db_file_name": db_file_name[0], "VAR_STRING": query_info["VAR_STRING"]}
+                    cursor.execute(query_sample_check, query_sample_check_data)
+                    sam_res = cursor.fetchall()
 
-                    formatted_res = [list(i) for i in res] # res returns a list of tuples by default, needs to be list of lists
-                    count = len(formatted_res)
-                    target_vals = [formatted_res[0][2],formatted_res[0][3],formatted_res[0][4],formatted_res[0][5],count]
-                    tsv_writer.writerow(target_vals)                    
+                    print("samres:", sam_res)
+                    
+                    # if sample is also present, append to tsv
+                    if sam_res != []:
+                        print(f"variant {query_info['VAR_STRING']} and sample {db_file_name[0]} already present, writing variant into tsv")
+                        
+                        formatted_res = [list(i) for i in res] # res returns a list of tuples by default, needs to be list of lists
+                        target_vals = [formatted_res[0][2],formatted_res[0][3],formatted_res[0][4],formatted_res[0][5]]
+                        tsv_writer.writerow(target_vals)
+                    elif sam_res == []:
+                        print(f"variant {query_info['VAR_STRING']} present, missing sample {db_file_name[0]}. Creating new instance of sample in db")
+
+                        # get varstring id
+                        query_vs_id = ("SELECT variant_id FROM variant WHERE VAR_STRING = %(VAR_STRING)s")
+                        cursor.execute(query_vs_id, query_info)
+                        vs_id = cursor.fetchone()
+
+                        print("acquired id =",vs_id)
+
+                        # create new sample in db
+                        new_path = file_path.replace(file_name, '')     # strip path of the vcf file
+                        folder = os.listdir(new_path)                   # list everything in the directory
+                        target = [i for i in folder if ".xlsx" in i]    # find the excel file
+                        data_file = new_path + '/' + target[0]          # add it to the path
+                        wb = load_workbook(data_file)
+                        ws = wb['Sheet1']
+                        rows = list(ws.rows)
+
+                        # remove spaces in column names to make it work for SQL
+                        for i in range(len(rows[0])):
+                            if rows[0][i].value.find(" ") != -1:
+                                rows[0][i].value = "_".join(rows[0][i].value.split())
+
+                        # look for a match in the excel file
+                        for i in range (1, len(rows)):
+                            chrom_val = rows[i][0].value
+                            pos_val = str(rows[i][1].value) # this gets parsed as int so needs typecasting
+                            ref_val = rows[i][2].value
+                            alt_val = rows[i][3].value
+
+                            # if a matching varstring is found
+                            if chrom_val == extracted_info["CHROM"]  \
+                                and pos_val == extracted_info["POS"] \
+                                and ref_val == extracted_info["REF"] \
+                                and alt_val == extracted_info["ALT"]:
+
+                                query_data_newsam = {
+                                "sample_id": None,
+                                "file_name": db_file_name[0],
+                                "VAF": None,
+                                "GT": None,
+                                "DP": None,
+                                "RELIABLE": None
+                                }
+
+                                j = 0
+                                variant_string = ""
+                                for cell in rows[i]:
+                                    current = rows[0][j].value # the column name
+                                    
+                                    if cell.value == '.':
+                                        cell.value = None
+
+                                    if current == "VAF":
+                                        query_data_newsam[current] = cell.value
+                                    elif current == "DP":
+                                        query_data_newsam[current] = cell.value
+                                        query_data_newsam["RELIABLE"] = True if cell.value != None and int(cell.value) > DP_THRESHOLD else False
+                                    elif current == "GT":
+                                        if cell.value == "het":
+                                            query_data_newsam[current] = 1
+                                        elif cell.value == "hom":
+                                            query_data_newsam[current] = 2
+                                    j += 1
+
+                        cursor.execute("SET @sam_id = uuid()")
+
+                        query_sample = (
+                                    "INSERT INTO sample "
+                                    "(sample_id, file_name, VAF, GT, DP, RELIABLE) VALUES "
+                                    "(@sam_id, %(file_name)s, %(VAF)s, %(GT)s, %(DP)s, %(RELIABLE)s)"
+                                    )
+                        cursor.execute(query_sample, query_data_newsam)
+
+                        # create new instance in db
+                        query_instance = (
+                                    "INSERT INTO instance(variant_id, sample_id) VALUES (%s, @sam_id)"
+                                    )
+                        cursor.execute(query_instance, vs_id)
+                        print("added new sample to db")
+                        connection.commit()
 
     except Error as e:
         print("Error connecting to database,", e)
@@ -220,7 +319,9 @@ def vcf_scraper(file_path):
 
 
 def main():
-    path = "../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33.vcf"
-    vcf_scraper(path)
+    # path = "../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33.vcf"
+    path = "../esempio_dati/CARDIOPRO-CQ1-HD793/CARDIOPRO-CQ1-HD793.vcf"
+    # path = "../esempio_dati/test_sample/test_sample.vcf"
 
+    vcf_scraper(path)
 main()

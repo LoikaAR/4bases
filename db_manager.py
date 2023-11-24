@@ -121,19 +121,17 @@ def main():
                         j += 1
 
                     # print(variant_string)
-                    # set the IDs for variant and sample using MySQL
+
+                    # check that var string already exists
+                    query_check_vs = ("SELECT variant_id FROM variant WHERE VAR_STRING = %(VAR_STRING)s")
+                    cursor.execute(query_check_vs, query_data_variant)
+
+                    vs_res = cursor.fetchone()
+
                     cursor.execute("SET @var_id = uuid()")
                     cursor.execute("SET @sam_id = uuid()")
 
-                    query_variant = (
-                            "INSERT INTO variant "
-                            "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, GENE, ACMG, FEATURE_ID, "
-                            "EFFECT, HGVS_C, HGVS_P, ClinVar, ClinVarCONF, Varsome_link, Franklin_link) "
-                            "VALUES (@var_id, %(VAR_STRING)s, %(CHROM)s, %(POS)s, %(REF)s, %(ALT)s, %(GENE)s,"
-                            "%(ACMG)s, %(FEATURE_ID)s, %(EFFECT)s, %(HGVS_C)s, %(HGVS_P)s, %(ClinVar)s, "
-                            " %(ClinVarCONF)s, %(Varsome_link)s, %(Franklin_link)s)"
-                            )
-                    cursor.execute(query_variant, query_data_variant)
+                    # print("vs_res:", vs_res)
 
                     query_sample = (
                             "INSERT INTO sample "
@@ -142,11 +140,31 @@ def main():
                             )
                     cursor.execute(query_sample, query_data_sample)
 
-                    query_instance = (
-                            "INSERT INTO instance(variant_id, sample_id) VALUES (@var_id, @sam_id)"
-                            )
-                    cursor.execute(query_instance, query_data_instance)
+                    # if variant string was not present:
+                    if (vs_res == None):
+                        query_variant = (
+                                "INSERT INTO variant "
+                                "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, GENE, ACMG, FEATURE_ID, "
+                                "EFFECT, HGVS_C, HGVS_P, ClinVar, ClinVarCONF, Varsome_link, Franklin_link) "
+                                "VALUES (@var_id, %(VAR_STRING)s, %(CHROM)s, %(POS)s, %(REF)s, %(ALT)s, %(GENE)s,"
+                                "%(ACMG)s, %(FEATURE_ID)s, %(EFFECT)s, %(HGVS_C)s, %(HGVS_P)s, %(ClinVar)s, "
+                                " %(ClinVarCONF)s, %(Varsome_link)s, %(Franklin_link)s)"
+                                )
+                        cursor.execute(query_variant, query_data_variant)
 
+                        query_instance = (
+                                "INSERT INTO instance(variant_id, sample_id) VALUES (@var_id, @sam_id)"
+                                )
+                        cursor.execute(query_instance, query_data_instance)
+                    
+                    else:
+                        query_instance = (
+                                "INSERT INTO instance(variant_id, sample_id) VALUES (%s, @sam_id)"
+                                )
+                        cursor.execute(query_instance, [vs_res][0])
+
+
+            
                     connection.commit()
             cursor.close()
 
