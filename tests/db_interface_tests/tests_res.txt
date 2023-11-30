@@ -1,0 +1,46 @@
+connected to server 8.0.35-0ubuntu0.20.04.1
+connected to database 4evar_test
+CARDIOPRO-CQ1-NA07441_ann
+variants_in_sample(): TESTS PASSED for CARDIOPRO-CQ1-NA07441_ann
+
+BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107_ann
+variants_in_sample(): TESTS PASSED for BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107_ann
+
+BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107_ann
+variants_in_sample(): TESTS PASSED for BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107_ann
+
+CARDIOPRO-CQ1-AA32_ann
+variants_in_sample(): TESTS PASSED for CARDIOPRO-CQ1-AA32_ann
+
+CARDIOPRO-CQ1-AA33_ann
+variants_in_sample(): TESTS PASSED for CARDIOPRO-CQ1-AA33_ann
+
+HEVA_Nanopore_HD793_5min_37_5cyc_ann
+variants_in_sample(): TESTS PASSED for HEVA_Nanopore_HD793_5min_37_5cyc_ann
+
+BRCAPANEL_HD793_CQ242_CQPOOL_ann
+variants_in_sample(): TESTS PASSED for BRCAPANEL_HD793_CQ242_CQPOOL_ann
+
+HEVA_Nanopore_AA040_5min_37_5cyc_ann
+variants_in_sample(): TESTS PASSED for HEVA_Nanopore_AA040_5min_37_5cyc_ann
+
+HEVA_Nanopore_HD829_5min_37_5cyc_ann
+variants_in_sample(): TESTS PASSED for HEVA_Nanopore_HD829_5min_37_5cyc_ann
+
+HEVA_Nanopore_HD794_5min_37_5cyc_ann
+variants_in_sample(): TESTS PASSED for HEVA_Nanopore_HD794_5min_37_5cyc_ann
+
+CARDIOPRO-CQ1-HD793_ann
+variants_in_sample(): TESTS PASSED for CARDIOPRO-CQ1-HD793_ann
+
+HEVA_Nanopore_HD793_ann
+variants_in_sample(): TESTS PASSED for HEVA_Nanopore_HD793_ann
+
+BRCAPANEL_AA053_CQ242_CQPOOL_ann
+variants_in_sample(): TESTS PASSED for BRCAPANEL_AA053_CQ242_CQPOOL_ann
+
+HEVA_Nanopore_HD794_ann
+variants_in_sample(): TESTS PASSED for HEVA_Nanopore_HD794_ann
+
+32msamples_containing_variant(): TESTS PASSED
+Connection closed

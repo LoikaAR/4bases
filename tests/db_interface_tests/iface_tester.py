@@ -46,28 +46,44 @@ def main():
                 for elem in res_var1:
                     q_verify_relation = ("SELECT VAR_STRING FROM variant WHERE variant_id = %s")
                     cursor.execute(q_verify_relation, [elem["ID"]])
-                    relation_res = cursor.fetchone()
+                    varstring_res = cursor.fetchone()[0]
 
-                    if (relation_res[0] != elem["var_string"]):
+                    if (varstring_res != elem["var_string"]):
                         relation_mismatch = True
-                        print(relation_res[0], "does not match", elem["var_string"])
+                        print("varstring-ID mismatch:",varstring_res[0], "does not match", elem["var_string"])
 
+                    # returns all samples it is present in
                     q_verify_file1 = ("SELECT sample_id FROM instance WHERE variant_id = %s")
                     cursor.execute(q_verify_file1, [elem["ID"]])
-                    id = cursor.fetchone()
-                    
-                    q_verify_file2 = ("SELECT file_name FROM sample WHERE sample_id = %s")
-                    cursor.execute(q_verify_file2, id)
+                    id = cursor.fetchall()
 
-                    res = cursor.fetchone()
-                    if (res[0] != sample_file):
-                        file_mismatch = True
-                        print(res[0], "does not match", sample_file)
+                    if (len(id) == 1):
+                        q_verify_file2 = ("SELECT file_name FROM sample WHERE sample_id = %s")
+                        cursor.execute(q_verify_file2, id[0])
+                        res = cursor.fetchone()
+
+                        if (res[0] != sample_file):
+                            file_mismatch = True
+                            print("file mismatch:",res[0], "is not", sample_file)
+                    # it can happen that variant is present in > 1 sample
+                    elif (len(id) > 1):
+                        for sam_id in id:
+                            inner_query = ("SELECT file_name FROM sample WHERE sample_id = %s")
+                            cursor.execute(inner_query, sam_id)
+                            cand_file = cursor.fetchone()[0]
+                            if (cand_file == sample_file):
+                                file_mismatch = False
+                                break
+                        if (file_mismatch):
+                            print("file mismatch:", sample_file, "not found among samples with IDs", id)
 
 
                 if (relation_mismatch or file_mismatch):
-                    print(Fore.RED + "variants_in_sample(): TESTS FAILED")
-                else: print(Fore.GREEN + "variants_in_sample(): TESTS PASSED for", sample_file)
+                    print("variants_in_sample(): TESTS FAILED for", sample_file)
+                    print("")
+                else: 
+                    print("variants_in_sample(): TESTS PASSED for", sample_file)
+                    print("")
 
             query_all_var_strings = ("SELECT VAR_STRING FROM variant;")
             cursor.execute(query_all_var_strings)
@@ -98,8 +114,8 @@ def main():
                         varstring_mismatch = True
                 
             if (relation_mismatch or varstring_mismatch):
-                print(Fore.RED + "samples_containing_variant(): TESTS FAILED")
-            else: print(Fore.GREEN + "samples_containing_variant(): TESTS PASSED")
+                print("samples_containing_variant(): TESTS FAILED")
+            else: print("samples_containing_variant(): TESTS PASSED")
     
     except Error as e:
         print("Error connecting to database,", e)

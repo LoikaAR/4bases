@@ -1,6 +1,7 @@
 import os
 import sys
 import mysql.connector
+from colorama import Fore
 from openpyxl import load_workbook
 from mysql.connector import Error
 
@@ -88,11 +89,11 @@ try:
         fail = False
         for b in NULL_MATCHES:
             if b == False:
-                print("TESTS FAILED")
+                print(Fore.RED + "TESTS FAILED")
                 fail = True
                 break
         if fail == False:
-            print("TESTS PASSED")
+            print(Fore.GREEN + "TESTS PASSED")
             
         cursor.close()
 

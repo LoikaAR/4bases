@@ -1,7 +1,6 @@
 import os
 import sys
 import mysql.connector
-from dataclasses import dataclass
 from openpyxl import load_workbook
 from mysql.connector import Error
 
@@ -11,12 +10,15 @@ connection = None                   # prepare the connection
 DP_THRESHOLD = 20                   # depth threshold
 VAR_STRINGS = []                    # vector of variant strings
 
+db_config = {
+    'host': 'localhost',
+    'database': 'null_testing',
+    'user': 'root',
+    'password': 'PassMass123!'
+}
 
 try:
-    connection = mysql.connector.connect(host='localhost',
-                                         database='null_testing',
-                                         user='root',
-                                         password='PassMass123!')
+    connection = mysql.connector.connect(**db_config)
 
     if connection and connection.is_connected():
         db_info = connection.get_server_info()
@@ -25,8 +27,8 @@ try:
         cursor = connection.cursor(buffered=True) # buffered prevents unread result error 
         cursor.execute("select database();")
 
-        record = cursor.fetchone()
-        print("connected to database ", record)
+        record = cursor.fetchone()[0]
+        print("connected to database", record)
 
         id_counter = 0
         for dir in dir_list:
@@ -49,6 +51,7 @@ try:
             DP_missing = True
             VAF_missing = True
 
+            # check that DP and VAF columns are present 
             for i in range(len(rows[0])):
                 if rows[0][i].value == "DP":
                     DP_missing = False
@@ -140,7 +143,7 @@ try:
                 if VAF_missing:
                     query_vaf = ("INSERT INTO VAF "
                                 "(vaf_id, val, row_num, col_num, is_null, file_name) " 
-                                "VALUES (%(vaf_id)s, 9.999999, 99999, 99999, True, %(file_name)s)")                
+                                "VALUES (%(vaf_id)s, -1.000000, -1, -1, True, %(file_name)s)")                
                 else:
                     query_vaf = ("INSERT INTO VAF "
                                 "(vaf_id, val, row_num, col_num, is_null, file_name) "
@@ -155,7 +158,7 @@ try:
                 if DP_missing:
                     query_dp = ("INSERT INTO DP "
                                     "(dp_id, val, row_num, col_num, is_null, file_name) VALUES "
-                                    "(%(dp_id)s, 99999, 99999, 99999, True, %(file_name)s)")
+                                    "(%(dp_id)s, -1, -1, -1, True, %(file_name)s)")
                 else:
                     query_dp = ("INSERT INTO DP "
                                     "(dp_id, val, row_num, col_num, is_null, file_name) "
