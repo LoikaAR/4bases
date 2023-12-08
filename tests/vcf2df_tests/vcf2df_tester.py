@@ -1,207 +1,77 @@
-import os
+import json
 import csv
 import pandas as pd
 import mysql.connector
 from mysql.connector import Error
 from openpyxl import load_workbook
 
-connection = None                   # prepare the connection
+connection = None       # prepare connection
+DP_THRESHOLD = 20       # depth threshold
 
-def vcf_scraper(file_path):
-    file_name = file_path.split('/')[-1]
-    path = '../esempio_dati/CARDIOPRO-CQ1-AA33/'+file_name
+db_config = {
+    'host': 'localhost',
+    'database': '4evar_test',
+    'user': 'root',
+    'password': 'PassMass123!'
+}
+
+def test_variants():
     try:
-        connection = mysql.connector.connect(host='localhost',
-                                            database='4evar_test',
-                                            user='root',
-                                            password='PassMass123!')
+        connection = mysql.connector.connect(**db_config)
 
         if connection and connection.is_connected():
             db_info = connection.get_server_info()
-            print("Connected to server ", db_info)
             cursor = connection.cursor()
-            cursor.execute("SELECT DATABASE();")
+            cursor.execute('SELECT DATABASE();')
             db_name = cursor.fetchone()[0]
-            print("Connected to database", db_name)
+            
+            file = open('./new_variants.json', 'r')
+            data = json.load(file)
+            cardinal_fail = False
 
-            with open(file_path, 'r') as file_:
-                for i, line in enumerate(file_):
-                    if line.startswith('#CHROM'):
-                        header = line.strip('#').strip().split('\t')
-                        break
 
-            # read the vcf file
-            data = pd.read_csv(file_path, sep ='\t', skiprows=i, header=None)
-            pd.set_option('display.max_rows', data.shape[0]+1)
-            pd.set_option('display.max_columns', 20)
+            if (len(data) % 2 != 0):
+                print('incorrect cardinality')
+                cardinal_fail = True
 
-            data.columns = header
-            target_data = data[['CHROM', 'POS', 'REF', 'ALT']]
-            n_rows = target_data.shape[0]
-            n_cols = target_data.shape[1]
 
-            # prepare the tsv file for existing variants
-            out_file = open("existing.tsv", "a")
-            tsv_writer = csv.writer(out_file, delimiter='\t')
-            col_names = ["CHROM", "POS", "REF", "ALT", "count"]
-            tsv_writer.writerow(col_names)
+            count_fail = False
+            relation_fail = False
+            var_idx = 0
+            # iterate over every retrieved variant
+            while var_idx < len(data)-1:
+                sam_idx = var_idx + 1
+                # print('var id:',data[var_idx].get('variant_id'))
+                # print('sam id:',data[sam_idx].get('sample_id'))
+                count_query = ('SELECT COUNT(*) FROM variant WHERE VAR_STRING = %s') # should be 1
+                cursor.execute(count_query, [data[var_idx].get('VAR_STRING')])
+                count_res = cursor.fetchone()[0]
+                if (count_res > 1 or count_res < 1):
+                    print(f"redundant variant with var string {data[var_idx].get('VAR_STRING')} was added")
+                    count_fail = True
 
-            # loop that extracts the variant strings
-            for row in range(1, n_rows):
-                extracted_info = {"CHROM": None, "REF": None, "POS": None, "ALT": None} # for lookup later
-                query_info = {"VAR_STRING": ""}
+                relation_query = ('SELECT sample_id FROM instance WHERE variant_id = %s')
+                cursor.execute(relation_query, [data[var_idx].get('variant_id')])
+                rel_res = cursor.fetchall() # should not return more than 1 result
 
-                for col in range(0, n_cols):
-                    query_info['VAR_STRING'] += str(target_data.iloc[row, col])
+                if (len(rel_res) > 1):
+                    relation_fail = True
 
-                    # separate pieces of data for lookup in excel files 
-                    if target_data.iloc[0,col] == "#CHROM":
-                        extracted_info["CHROM"] = target_data.iloc[row, col]
-                    elif target_data.iloc[0,col] == "REF":
-                        extracted_info["REF"] = target_data.iloc[row, col]
-                    elif target_data.iloc[0,col] == "POS":
-                        extracted_info["POS"] = target_data.iloc[row, col]
-                    elif target_data.iloc[0,col] == "ALT":
-                        extracted_info["ALT"] = target_data.iloc[row, col]
+                rel_match = data[sam_idx].get('sample_id') == rel_res[0][0]
 
-                print("extracted var string:", query_info["VAR_STRING"])
-                query = "SELECT * FROM variant WHERE VAR_STRING = %(VAR_STRING)s" #  ask about concatenation
+                if (not rel_match):
+                    print(f"variant {data[var_idx].get('variant_id')} is not connected to sample {data[sam_idx].get('sample_id')}")
+                    relation_fail = True
 
-                cursor.execute(query, query_info)
-                res = cursor.fetchall()
+                var_idx += 2
 
-                # if variant is not found in the db:
-                if res == []:
-                    print(f"Variant {query_info['VAR_STRING']} not found in vcf file - scraping excel file and inserting into db")
-
-                    # ASSUMPTION: the excel file is in the same folder as the .vcf file
-                    new_path = file_path.replace(file_name, '')          # strip path of the vcf file
-                    folder = os.listdir(new_path)                   # list everything in the directory
-                    target = [i for i in folder if ".xlsx" in i]    # find the excel file
-                    data_file = new_path + '/' + target[0]          # add it to the path
-
-                    print("current file:", data_file)
-
-                    wb = load_workbook(data_file)
-                    ws = wb['Sheet1']
-
-                    rows = list(ws.rows)
-                    cols = list(ws.columns)
-
-                    # remove spaces in column names to make it work for SQL
-                    for i in range(len(rows[0])):
-                        if rows[0][i].value.find(" ") != -1:
-                            rows[0][i].value = "_".join(rows[0][i].value.split())
-
-                    # look for a match in the excel file
-                    for i in range (1, len(rows)):
-                        chrom_val = rows[i][0].value
-                        pos_val = str(rows[i][1].value) # this gets parsed as an int so needs typecasting
-                        ref_val = rows[i][2].value
-                        alt_val = rows[i][3].value
-
-                        # if a match is found
-                        if chrom_val == extracted_info["CHROM"]  \
-                            and pos_val == extracted_info["POS"] \
-                            and ref_val == extracted_info["REF"] \
-                            and alt_val == extracted_info["ALT"]:
-                                
-                            # prepare query data for db
-                            query_data_variant = {
-                                "variant_id": None,
-                                "VAR_STRING": None,
-                                "CHROM": None,
-                                "POS": None,
-                                "REF": None,
-                                "ALT": None,
-                                "GENE": None,
-                                "ACMG": None,
-                                "FEATURE_ID": None,
-                                "EFFECT": None,
-                                "HGVS_C": None,
-                                "HGVS_P": None,
-                                "ClinVar": None,
-                                "ClinVarCONF": None,
-                                "Varsome_link": None,
-                                "Franklin_link": None
-                            }
-
-                            query_data_sample = {
-                                "sample_id": None,
-                                "file_name": file_name,
-                                "VAF": None,
-                                "GT": None,
-                                "DP": None,
-                                "RELIABLE": None
-                            }
-
-                            query_data_instance = {
-                                "variant_id": None,
-                                "sample_id": None
-                            }
-                            # populate the query_data structure
-                            j = 0
-                            variant_string = ""
-                            for cell in rows[i]:
-                                current = rows[0][j].value # the column name
-                                
-                                if cell.value == '.':
-                                    cell.value = None
-                                
-                                if current == "VAF" or current == "GT" or current == "DP":
-                                    query_data_sample[current] = cell.value
-                                else :
-                                    # print(f"{current}: {cell.value}}")
-                                    query_data_variant[current] = cell.value
-
-                                    if (current == "CHROM" or current == "REF"):
-                                        variant_string += str(cell.value)
-                                    elif (current == "POS" or current == "ALT"):
-                                        variant_string += str(cell.value)
-                                        query_data_variant[current] = cell.value
-                            
-                                j += 1
-                                query_data_variant["VAR_STRING"] = query_info["VAR_STRING"]
-
-                            cursor.execute("SET @var_id = uuid()")
-                            cursor.execute("SET @sam_id = uuid()")
-
-                            query_variant = (
-                                    "INSERT INTO variant "
-                                    "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, GENE, ACMG, FEATURE_ID, "
-                                    "EFFECT, HGVS_C, HGVS_P, ClinVar, ClinVarCONF, Varsome_link, Franklin_link) "
-                                    "VALUES (@var_id, %(VAR_STRING)s, %(CHROM)s, %(POS)s, %(REF)s, %(ALT)s, %(GENE)s,"
-                                    "%(ACMG)s, %(FEATURE_ID)s, %(EFFECT)s, %(HGVS_C)s, %(HGVS_P)s, %(ClinVar)s, "
-                                    " %(ClinVarCONF)s, %(Varsome_link)s, %(Franklin_link)s)"
-                                    )
-                            cursor.execute(query_variant, query_data_variant)
-
-                            query_sample = (
-                                    "INSERT INTO sample "
-                                    "(sample_id, file_name, VAF, GT, DP, RELIABLE) VALUES "
-                                    "(@sam_id, %(file_name)s, %(VAF)s, %(GT)s, %(DP)s, %(RELIABLE)s)"
-                                    )
-                            cursor.execute(query_sample, query_data_sample)
-
-                            query_instance = (
-                                    "INSERT INTO instance(variant_id, sample_id) VALUES (@var_id, @sam_id)"
-                                    )
-                            cursor.execute(query_instance, query_data_instance)
-                            
-                            connection.commit()
-                        # else:
-                            # print("variants not matching")
-                else:
-                    # append the already present file to a .tsv file 
-                    print(f"variant {query_info['VAR_STRING']} already present, writing into tsv")
-
-                    formatted_res = [list(i) for i in res] # res returns a list of tuples by default, needs to be list of lists
-                    count = len(formatted_res)
-                    target_vals = [formatted_res[0][2],formatted_res[0][3],formatted_res[0][4],formatted_res[0][5],count]
-                    tsv_writer.writerow(target_vals)                    
+            if (relation_fail or count_fail or cardinal_fail):
+                print("TESTS FAILED")
+            else:
+                print("TESTS PASSED")
 
     except Error as e:
-        print("Error connecting to database,", e)
+        print('Error connecting to database,', e)
 
     finally:
         if connection:
@@ -211,8 +81,114 @@ def vcf_scraper(file_path):
                 print("Connection closed")
 
 
+def test_samples():
+    try:
+        connection = mysql.connector.connect(**db_config)
+
+        if connection and connection.is_connected():
+            db_info = connection.get_server_info()
+            cursor = connection.cursor()
+            cursor.execute('SELECT DATABASE();')
+            db_name = cursor.fetchone()[0]
+            
+            file = open('./new_samples.json', 'r')
+            data = json.load(file)
+            cardinal_fail = False
+
+            if (len(data) % 2 != 0):
+                print('incorrect cardinality')
+                cardinal_fail = True
+
+            relation_fail = False
+            sam_idx = 0
+            # iterate over every retrieved variant
+            while sam_idx < len(data)-1:
+                var_idx = sam_idx+1
+
+                relation_query = ('SELECT variant_id FROM instance WHERE sample_id = %s')
+                cursor.execute(relation_query, [data[sam_idx].get('sample_id')])
+                rel_res = cursor.fetchall() # should not return more than 1 result
+
+                if (len(rel_res) > 1):
+                    relation_fail = True
+
+                var_match_query = ('SELECT VAR_STRING FROM variant WHERE variant_id = %s')
+                cursor.execute(var_match_query, rel_res[0])
+                var_res = cursor.fetchone()[0]
+
+                rel_match = data[var_idx].get('var_string') == var_res
+
+                if (not rel_match):
+                    print(f"sample {data[sam_idx].get('sample_id')} is not connected to variant {data[var_idx].get('var_string')}")
+                    relation_fail = True
+                sam_idx += 2
+
+            if (relation_fail or cardinal_fail):
+                print("TESTS FAILED")
+            else:
+                print("TESTS PASSED")
+
+    except Error as e:
+        print('Error connecting to database,', e)
+
+    finally:
+        if connection:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+                print("Connection closed")
+
+def test_existing():
+    try:
+        connection = mysql.connector.connect(**db_config)
+
+        if connection and connection.is_connected():
+            db_info = connection.get_server_info()
+            cursor = connection.cursor()
+            cursor.execute('SELECT DATABASE();')
+            db_name = cursor.fetchone()[0]
+
+        existing = []
+        count_fail = False
+        with open('../../out_files/existing.tsv') as file:
+            target = csv.reader(file, delimiter="\t")
+                
+            for line in target:
+                existing.append(line)
+        
+        for idx in range(1, len(existing)):
+            var_string = "".join(str(i) for i in existing[idx])
+
+            query = ('SELECT COUNT(*) FROM variant WHERE VAR_STRING = %s')
+            cursor.execute(query, [var_string])
+
+            res = cursor.fetchone()[0]
+
+            if (res != 1):
+                count_fail = True
+                print(var_string, "appears more than one in the database")
+
+        if (count_fail):
+            print('TESTS FAILED')
+        else:
+            print('TESTS PASSED')
+
+    except Error as e:
+        print('Error connecting to database,', e)
+
+    finally:
+        if connection:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+                print("Connection closed")
+
+
+
+
 def main():
-    path = "../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33.vcf"
-    vcf_scraper(path)
+    # test_variants()
+    # test_samples()
+    test_existing()
 
 main()

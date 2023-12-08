@@ -1,7 +1,6 @@
 import os
 import sys
 import mysql.connector
-from dataclasses import dataclass
 from openpyxl import load_workbook
 from mysql.connector import Error
 
@@ -10,17 +9,16 @@ dir_list = list(os.listdir(path))   # list of all files in the target folder
 connection = None                   # prepare the connection
 DP_THRESHOLD = 20                   # depth threshold
 
-# @dataclass
-# class var_string:
-#     string: int
-#     frequency: int = 0
+db_config = {
+    'host': 'localhost',
+    'database': '4evar_test',
+    'user': 'root',
+    'password': 'PassMass123!'
+}
 
 def main():
     try: 
-        connection = mysql.connector.connect(host='localhost',
-                                             database='4evar_test',
-                                             user='root',
-                                             password='PassMass123!') # user and password should be parameters?
+        connection = mysql.connector.connect(**db_config) # user and password should be parameters?
 
         if connection and connection.is_connected():
             db_info = connection.get_server_info()
@@ -51,7 +49,7 @@ def main():
                 cols = list(ws.columns)
                 print(f"found {len(rows)-1} variants in {file_name}")
 
-                # remove whitespaces so column names work with MySQL syntax
+                # remove whitespaces so col names work with MySQL syntax
                 for i in range(len(rows[0])):
                     if rows[0][i].value.find(" ") != -1:
                         rows[0][i].value = "_".join(rows[0][i].value.split())

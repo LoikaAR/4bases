@@ -1,0 +1,866 @@
+Variants present in sample HEVA_Nanopore_HD794_ann :
+ID: 4f401725-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr145796269GC
+
+ID: 4f40f0b4-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr145798555TC
+
+ID: 4f41ebed-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229416366GC
+
+ID: 504695aa-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229416481TC
+
+ID: 4f425754-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229416572TC
+
+ID: 4f42b675-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229419591GT
+
+ID: 535fe6ad-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229444076GT
+
+ID: 52b6864f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229444095CT
+
+ID: 5047b191-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229445458GT
+
+ID: 50481908-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229446184CG
+
+ID: 4f43f9ef-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229455267AG
+
+ID: 50490401-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229456384TC
+
+ID: 504964bc-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229456385GA
+
+ID: 4f4475e7-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229462520GA
+
+ID: 504a212e-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229462684GA
+
+ID: 4f450324-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229498210AG
+
+ID: 4f457167-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229543663TC
+
+ID: 4fdde972-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr229940529AT
+
+ID: 4f45df3d-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr230143499GC
+
+ID: 4f475d8f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247601106TC
+
+ID: 4f495ea4-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247630550CG
+
+ID: 4f49ff24-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247635523CTTC
+
+ID: 50d1a619-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247635722ATA
+
+ID: 504dfce3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247641559TAAAAAAAAAAAAAAAT
+
+ID: 504e6b10-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247656871TC
+
+ID: 4f4b04ee-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247693959GA
+
+ID: 504f4aff-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247702451GTTTTTTTTG
+
+ID: 504fe0fc-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247703500TC
+
+ID: 52c0e813-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247737218AC
+
+ID: 52c1740c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr247739551AG
+
+ID: 4fe3a351-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr248030838AT
+
+ID: 5050bf83-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr248032740ATTA
+
+ID: 4f4d4aff-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr248032740ATTTA
+
+ID: 4f4ddba3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr248032874ACTATA
+
+ID: 4f4e6e4a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr248033551CG
+
+ID: 505251f4-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr248033890CTTTTTTTC
+
+ID: 4fe77d5c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2215645464CG
+
+ID: 50532174-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2215645502GTGGTGAAGAACATTCAGGCAAG
+
+ID: 4f51fe0d-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2215657182TAAAAAT
+
+ID: 4f582afe-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr314197987AT
+
+ID: 50d92bba-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr314200416CTC
+
+ID: 5054cf95-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr337056000CA
+
+ID: 50553c0c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr341266133CCTTC
+
+ID: 4f5be778-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr3178922274CA
+
+ID: 4f5c4f98-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr3178922430AG
+
+ID: 5056b1a2-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr3178941853CTC
+
+ID: 4f5e2165-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr3178942431CG
+
+ID: 4f5ea303-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr3178952085AG
+
+ID: 537179bc-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr484444211TC
+
+ID: 4f5ff9d7-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112111309TAAT
+
+ID: 5058a1aa-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112154629CT
+
+ID: 5372e30e-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112159109CT
+
+ID: 4f60e8d4-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112162854TC
+
+ID: 4f614dd9-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112164561GA
+
+ID: 4f622798-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112175770GA
+
+ID: 4f62ef21-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112176325GA
+
+ID: 4f635a80-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112176559TG
+
+ID: 4f63bc57-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112176756TA
+
+ID: 4f6420ae-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5112177171GA
+
+ID: 4f64fd64-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5131892979GA
+
+ID: 505c0ee1-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5131923821AG
+
+ID: 4f65654c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5131927550ATA
+
+ID: 4f65c632-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr5131931451TAT
+
+ID: 505dba8d-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr76022626CT
+
+ID: 4f66edb1-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr76026775TC
+
+ID: 4f67518b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr76026988GA
+
+ID: 4f682ce9-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr76036980GC
+
+ID: 4ff4d0b6-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr76037057GAG
+
+ID: 50e604cd-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr76037057GAAAG
+
+ID: 4f695bfd-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr76038722TC
+
+ID: 537a7832-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr76791126TAT
+
+ID: 537aec7b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr76792621CT
+
+ID: 506217cf-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr755214443GA
+
+ID: 4ff66b2a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr755221655GA
+
+ID: 4f6a8ab3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr755228053AT
+
+ID: 5063e2e3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr755233089CT
+
+ID: 50e8d49c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr755233185CT
+
+ID: 537da667-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr755238087CT
+
+ID: 4ff8da0d-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr755249063GA
+
+ID: 4f6ba879-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr755266417TC
+
+ID: 4f6c70ea-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830916085TC
+
+ID: 506596a2-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830921847GA
+
+ID: 4f6cceca-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830924557CT
+
+ID: 4f6d97aa-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830933816CTTC
+
+ID: 4ffb1586-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830933859CT
+
+ID: 5067bc24-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830938370ATA
+
+ID: 5068349b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830938704GA
+
+ID: 5068a7c5-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830945299AT
+
+ID: 5382537a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830954244GTTG
+
+ID: 4f6dfb95-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830954244GTTTG
+
+ID: 4f6e56d3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830958353CTC
+
+ID: 506a6fd7-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830969355CTTC
+
+ID: 4f6f1f18-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830969355CTTTC
+
+ID: 506b4835-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830973811CT
+
+ID: 4ffcbada-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr830999122CT
+
+ID: 4f704c11-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr831005017TTC
+
+ID: 506c851b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr831012299ATA
+
+ID: 506d0aa0-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr831024638CT
+
+ID: 4f716c07-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr890955624TA
+
+ID: 4f7234cd-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr890958422TC
+
+ID: 4f72a74a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr890958530TC
+
+ID: 4f7304e3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr890967464CTC
+
+ID: 4f736bfa-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr890967711AG
+
+ID: 4f73cbae-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr890970935GA
+
+ID: 4f7430a6-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr890990479CG
+
+ID: 4f74986c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr890995019CT
+
+ID: 4f74f574-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr921968199CG
+
+ID: 50f4c8bf-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr921974758AAC
+
+ID: 538a8d05-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr921994233TCT
+
+ID: 4f7553b4-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr998209594GA
+
+ID: 4f75bc8c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr998221861TC
+
+ID: 4f761aaa-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr998229389CG
+
+ID: 507327bd-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr998230990AAT
+
+ID: 5002a726-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr998238358GA
+
+ID: 4f76e0b5-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr998242925AG
+
+ID: 4f77a555-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr998270646TTGCC
+
+ID: 4f78042c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1043595968AG
+
+ID: 507545a7-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1043600689AG
+
+ID: 4f78760b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1043606687AG
+
+ID: 4f79471f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1043613843GT
+
+ID: 4f7a11b9-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1043622217TC
+
+ID: 53900898-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1089623716GA
+
+ID: 52f40da8-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1089623860CTC
+
+ID: 52f473ad-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1089623901GC
+
+ID: 50771d59-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1089690758AG
+
+ID: 50779686-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1089692731GTG
+
+ID: 50787626-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1089720633CTTTC
+
+ID: 5078ea0c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1089720907TG
+
+ID: 4d2a42ac-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11534242AG
+
+ID: 500724ba-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr112906196ACCGCGACCGGAGA
+
+ID: 4f7c102f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1164572018TC
+
+ID: 4f7c7482-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1164572557AG
+
+ID: 507af5fb-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1164577620GC
+
+ID: 4f7d9dcf-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1194197260AG
+
+ID: 507c1a6a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1194212048CT
+
+ID: 4f7f3726-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1194212930TAT
+
+ID: 4f7f9a19-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1194212930TAAT
+
+ID: 52fbef8c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1194225807CT
+
+ID: 507d3e04-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1194225920CT
+
+ID: 5009edc3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108098459TAAT
+
+ID: 4f805827-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108100105GTTTG
+
+ID: 507eac23-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108114661ATTTTA
+
+ID: 507f20a1-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108117897ATA
+
+ID: 53993b3c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108119615CAAAC
+
+ID: 50802b26-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108121410CTTC
+
+ID: 5080af83-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108121410CTTTC
+
+ID: 508129b0-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108127125GGA
+
+ID: 4f82b518-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108129657AG
+
+ID: 50822446-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108141955CTC
+
+ID: 5083285b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108150207CTC
+
+ID: 5083a7c7-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108150313CT
+
+ID: 4f8514cf-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108151707TTA
+
+ID: 50848d86-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108175462GA
+
+ID: 4f8574a0-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108183167AG
+
+ID: 5105feed-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108188266ATTA
+
+ID: 4f87ee98-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108202154CTC
+
+ID: 4f88c34a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr11108225483CT
+
+ID: 4d3b523a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1225368462CT
+
+ID: 508730ce-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1225378716GAG
+
+ID: 5087a03d-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1225398281CT
+
+ID: 50888754-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1258145156CT
+
+ID: 5088e748-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332905219ATA
+
+ID: 4d76926b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332907535CTC
+
+ID: 5089c1c3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332911888AG
+
+ID: 4d814862-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332912299TC
+
+ID: 4d77ad55-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332913055AG
+
+ID: 4d7803a4-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332915005GC
+
+ID: 4d7853df-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332929232AG
+
+ID: 4d78ba16-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332929387TC
+
+ID: 508bfce9-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332936625GTG
+
+ID: 4d790de1-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332936646TC
+
+ID: 508ce4de-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332937354TTA
+
+ID: 53a4fbdf-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1332957972GC
+
+ID: 4f90ea15-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1348919358TG
+
+ID: 4f91583f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1348954159CTTC
+
+ID: 508e9a04-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1348954282CTTC
+
+ID: 4f9219d5-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1348955363CTC
+
+ID: 4f928552-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1349034022AAT
+
+ID: 4f935397-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1349039094CTTTTTTTTC
+
+ID: 4f93c81f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1349051012CT
+
+ID: 509176ae-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1349051474ATA
+
+ID: 4f9482d5-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1538614525GA
+
+ID: 4f95584a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1538631930CA
+
+ID: 4f95b5bb-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1538632148AG
+
+ID: 4f961a16-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1538641774AT
+
+ID: 4f967f17-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1538641776AAAATTAGT
+
+ID: 4f96e5ec-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1538641777GA
+
+ID: 4f97484c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1538643574TC
+
+ID: 5094f4a9-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1623615042TAAAT
+
+ID: 4f98139c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1623625463AT
+
+ID: 5095d691-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1623646141TTTCA
+
+ID: 511465ab-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1623647191TA
+
+ID: 4f98d6fa-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1668771372CT
+
+ID: 511594e5-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1668835765TGT
+
+ID: 50972dc3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1668849414CA
+
+ID: 4f9ae3e5-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1668857441TC
+
+ID: 5098064b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1668863752GA
+
+ID: 531ab6bb-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr177570578TAT
+
+ID: 4f9cff72-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr177579472GC
+
+ID: 4f9d66d3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr177579643CCCCCAGCCCTCCAGGTC
+
+ID: 4f9dcb86-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr177579801GC
+
+ID: 53b0bdce-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1717119708TTG
+
+ID: 4f9e9153-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1717122286CT
+
+ID: 501d5079-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1717122327GA
+
+ID: 501e76ec-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1717127471GA
+
+ID: 4f9f6f88-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729486152GA
+
+ID: 4f9fe289-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729508775GA
+
+ID: 4fa055da-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729508819ATTTTTA
+
+ID: 5320a7ee-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729509791CT
+
+ID: 53211b5b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729509801GT
+
+ID: 509c76d3-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729528154CA
+
+ID: 4fa0bd65-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729528406CTC
+
+ID: 4fa187c7-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729533434ATA
+
+ID: 501fe903-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729541437TC
+
+ID: 4fa1eb1c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729545987AAT
+
+ID: 5020c1cd-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729546175TC
+
+ID: 511da103-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729553477AAC
+
+ID: 4fa46375-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729559061ATTTTTTTTTA
+
+ID: 502306c1-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729563075GTG
+
+ID: 4fa6d7d6-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729653293TC
+
+ID: 4fa751e2-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729654876TA
+
+ID: 50a1b99b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729663345AG
+
+ID: 53b93110-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729663614GTG
+
+ID: 4fa7c09f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729663614GTTG
+
+ID: 53ba1ec4-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729663625TA
+
+ID: 4fa92664-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729670190CG
+
+ID: 4faa8da7-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729679246GA
+
+ID: 50a38a4e-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729687463TTA
+
+ID: 532a99dd-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1729705947TC
+
+ID: 50a401a6-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1733428167GA
+
+ID: 4faaf5e0-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1737864523TGT
+
+ID: 50a4c5d0-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1737864559GA
+
+ID: 5025a280-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1737868715CT
+
+ID: 5123f54c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1737873562GGC
+
+ID: 5025ffd1-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1737879762GA
+
+ID: 50265b7d-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1737884037CG
+
+ID: 502a3635-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1741251931GA
+
+ID: 53bf954e-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1741262604CAAAC
+
+ID: 53bffb0a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1741262604CAAAAC
+
+ID: 53c06500-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1741264654TTCA
+
+ID: 50a72fb0-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1756769979CT
+
+ID: 51264de0-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759760753TC
+
+ID: 4fb0682b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759760996AG
+
+ID: 53338e4a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759763114AT
+
+ID: 4fb0c8c9-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759763347AG
+
+ID: 4fb154ad-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759763465TC
+
+ID: 50a93ef8-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759821963GA
+
+ID: 5128393f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759853705AG
+
+ID: 4fb1ccde-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759857599CAC
+
+ID: 4fb2b4fe-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759857809CG
+
+ID: 50aa9e98-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759924612GC
+
+ID: 53c51de8-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1759934594TAT
+
+ID: 502c84f9-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1848584855ATA
+
+ID: 53364798-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1848584855ATTTTA
+
+ID: 50ac12fc-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1848586184AG
+
+ID: 50ac9783-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr1848586344CT
+
+ID: 4fb46750-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr191207238GT
+
+ID: 4fb55227-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr191219274GA
+
+ID: 50ae3f9f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr191220321TC
+
+ID: 50aeb9a9-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr191222012GC
+
+ID: 502d0979-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221337266GA
+
+ID: 4fb670c5-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221337415CG
+
+ID: 502e2f72-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221343982TGGGGAGCCAGGGCGCAGGTAGAGGAGGTGAGGGGCACT
+
+ID: 502ea1eb-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221344002AG
+
+ID: 53ca599a-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221344019CT
+
+ID: 4fb76b6c-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221346485TC
+
+ID: 4fb85f73-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221348084TC
+
+ID: 4fb95505-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221349037AG
+
+ID: 53cc13cb-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221349676TA
+
+ID: 53ccc167-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221349677CT
+
+ID: 50b363a5-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2221350936GA
+
+ID: 533c235b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2224143502CG
+
+ID: 50b4303b-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2224167513GA
+
+ID: 50b4ac4f-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2224167657GGAA
+
+ID: 50b52104-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2224176287GA
+
+ID: 50b584b0-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2229092920AG
+
+ID: 533d1fed-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2229117624TAAT
+
+ID: 53cfe1bd-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2229117666CG
+
+ID: 513510b1-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2230051705CTTTTTTC
+
+ID: 50b65a27-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2230069207CT
+
+ID: 50b6bf45-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2136206711CT
+
+ID: 4fbcd460-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2136206932GA
+
+ID: 50b7aa2e-8f86-11ee-96a4-646ee04f01cd
+Variant String: chr2136259345GA
+
+Total retrieved count: 283
+Connection closed
+===================================================================
+Samples containing variant chr1018816633CT:
+ID: 4d1bdd75-8f86-11ee-96a4-646ee04f01cd
+File name: CARDIOPRO-CQ1-NA07441_ann
+
+ID: 4df72adf-8f86-11ee-96a4-646ee04f01cd
+File name: CARDIOPRO-CQ1-AA32_ann
+
+ID: 52296217-8f86-11ee-96a4-646ee04f01cd
+File name: CARDIOPRO-CQ1-HD793_ann
+
+Total retrieved count: 3
+Connection closed
+===================================================================

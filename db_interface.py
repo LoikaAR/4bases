@@ -40,8 +40,8 @@ def variants_in_sample(sample_file_name):
             cursor.close()
             connection.close()
 
+            print("Variants present in sample", sample_file_name[0], ":")
             for elem in res:
-                print("Variants present in sample", sample_file_name[0] + ":")
                 print("ID:",elem["ID"])
                 print("Variant String:", elem["var_string"])
                 print("")

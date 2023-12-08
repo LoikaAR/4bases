@@ -1,5 +1,6 @@
 import os
 import csv
+import json
 import pandas as pd
 import mysql.connector
 from mysql.connector import Error
@@ -14,6 +15,11 @@ db_config = {
     'user': 'root',
     'password': 'PassMass123!'
 }
+
+new_vars = []
+new_samples = []
+
+# res = {'new_vars': [], 'new_samples': [] }
 
 def vcf_scraper(file_path):
     file_name = file_path.split('/')[-1]
@@ -45,9 +51,9 @@ def vcf_scraper(file_path):
             n_cols = target_data.shape[1]
 
             # prepare the tsv file for existing variants
-            out_file = open("existing.tsv", "a")
+            out_file = open("./out_files/existing.tsv", "a")
             tsv_writer = csv.writer(out_file, delimiter='\t')
-            col_names = ["CHROM", "POS", "REF", "ALT", "count"]
+            col_names = ["CHROM", "POS", "REF", "ALT"]
             tsv_writer.writerow(col_names)
 
             # check every row in vcf file
@@ -154,7 +160,6 @@ def vcf_scraper(file_path):
                                 if cell.value == '.':
                                     cell.value = None
 
-
                                 if current == "VAF":
                                     query_data_newsam[current] = cell.value
                                 elif current == "DP":
@@ -178,8 +183,15 @@ def vcf_scraper(file_path):
                                 j += 1
 
                             cursor.execute("SET @var_id = uuid()")
+                            cursor.execute("SELECT @var_id;")
+                            var_id = cursor.fetchone()[0]
+                            query_data_variant["variant_id"] = var_id
+                            
                             cursor.execute("SET @sam_id = uuid()")
-
+                            cursor.execute("SELECT @sam_id;")
+                            sam_id = cursor.fetchone()[0]
+                            query_data_newsam["sample_id"] = sam_id
+                            
                             query_variant = (
                                     "INSERT INTO variant "
                                     "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, GENE, ACMG, FEATURE_ID, "
@@ -201,6 +213,9 @@ def vcf_scraper(file_path):
                                     "INSERT INTO instance(variant_id, sample_id) VALUES (@var_id, @sam_id)"
                                     )
                             cursor.execute(query_instance, query_data_instance)
+
+                            new_vars.append(query_data_variant)
+                            new_vars.append(query_data_newsam)
                             
                             connection.commit()
                             
@@ -232,8 +247,6 @@ def vcf_scraper(file_path):
                         cursor.execute(query_vs_id, query_info)
                         vs_id = cursor.fetchone()
 
-                        print("acquired id =",vs_id)
-
                         # create new sample in db
                         new_path = file_path.replace(file_name, '')     # strip path of the vcf file
                         folder = os.listdir(new_path)                   # list everything in the directory
@@ -262,12 +275,12 @@ def vcf_scraper(file_path):
                                 and alt_val == extracted_info["ALT"]:
 
                                 query_data_newsam = {
-                                "sample_id": None,
-                                "file_name": db_file_name[0],
-                                "VAF": None,
-                                "GT": None,
-                                "DP": None,
-                                "RELIABLE": None
+                                    "sample_id": None,
+                                    "file_name": db_file_name[0],
+                                    "VAF": None,
+                                    "GT": None,
+                                    "DP": None,
+                                    "RELIABLE": None
                                 }
 
                                 j = 0
@@ -291,13 +304,22 @@ def vcf_scraper(file_path):
                                     j += 1
 
                         cursor.execute("SET @sam_id = uuid()")
+                        cursor.execute("SELECT @sam_id;")
+                        sam_id = cursor.fetchone()[0]
+                        query_data_newsam["sample_id"] = sam_id
+                            
 
                         query_sample = (
                                     "INSERT INTO sample "
                                     "(sample_id, file_name, VAF, GT, DP, RELIABLE) VALUES "
                                     "(@sam_id, %(file_name)s, %(VAF)s, %(GT)s, %(DP)s, %(RELIABLE)s)"
                                     )
+                        
                         cursor.execute(query_sample, query_data_newsam)
+                        existing_var = {"var_string": query_info['VAR_STRING']}
+                        
+                        new_samples.append(query_data_newsam)
+                        new_samples.append(existing_var)
 
                         # create new instance in db
                         query_instance = (
@@ -316,12 +338,15 @@ def vcf_scraper(file_path):
                 cursor.close()
                 connection.close()
                 print("Connection closed")
+                with open('./tests/vcf2df_tests/new_samples.json', 'w') as log:
+                    json.dump(new_samples, log)
+
+                with open('./tests/vcf2df_tests/new_variants.json', 'w') as log:
+                    json.dump(new_vars, log)
 
 
 def main():
-    # path = "../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33.vcf"
-    path = "../esempio_dati/CARDIOPRO-CQ1-HD793/CARDIOPRO-CQ1-HD793.vcf"
-    # path = "../esempio_dati/test_sample/test_sample.vcf"
-
+    # path = "../esempio_dati/CARDIOPRO-CQ1-HD793/CARDIOPRO-CQ1-HD793.vcf"
+    path = "../esempio_dati/test_sample/test_sample.vcf"
     vcf_scraper(path)
 main()

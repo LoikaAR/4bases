@@ -5,25 +5,45 @@ import mysql.connector
 from mysql.connector import Error
 from openpyxl import load_workbook
 
-connection = None                   # prepare the connection
+connection_main = None                   # prepare the connection_main
+connection_aux = None
 DP_THRESHOLD = 20
+
+db_main_config = {
+    'host':'localhost',
+    'database':'4evar_test',
+    'user':'root',
+    'password':'PassMass123!'
+}
+
+db_aux_config = {
+    'host':'localhost',
+    'database':'4evar_vcf_test',
+    'user':'root',
+    'password':'PassMass123!'
+}
+
+
 
 def vcf_scraper(file_path):
     file_name = file_path.split('/')[-1]
-    path = '../esempio_dati/CARDIOPRO-CQ1-AA33/'+file_name
     try:
-        connection = mysql.connector.connect(host='localhost',
-                                            database='4evar_test',
-                                            user='root',
-                                            password='PassMass123!')
+        connection_main = mysql.connector.connect(**db_main_config)
+        connection_aux = mysql.connector.connect(**db_aux_config)
 
-        if connection and connection.is_connected():
-            db_info = connection.get_server_info()
-            print("Connected to server ", db_info)
-            cursor = connection.cursor()
-            cursor.execute("SELECT DATABASE();")
-            db_name = cursor.fetchone()[0]
-            print("Connected to database", db_name)
+        if connection_main and connection_aux and connection_main.is_connected() and connection_aux.is_connected():
+            db_main_info = connection_main.get_server_info()
+            print("Connected to server", db_main_info)
+            cursor_main = connection_main.cursor()
+            cursor_main.execute("SELECT DATABASE();")
+            db_main_name = cursor_main.fetchone()[0]
+            print("Reading from", db_main_name)
+
+            cursor_aux = connection_aux.cursor()
+            cursor_aux.execute("SELECT DATABASE();")
+            db_aux_name = cursor_aux.fetchone()[0]
+            print("Writing to", db_aux_name)
+            
 
             with open(file_path, 'r') as file_:
                 for i, line in enumerate(file_):
@@ -68,15 +88,15 @@ def vcf_scraper(file_path):
                 print("extracted var string:", query_info["VAR_STRING"])
                 query = "SELECT * FROM variant WHERE VAR_STRING = %(VAR_STRING)s" #  ask about concatenation
 
-                cursor.execute(query, query_info)
-                res = cursor.fetchall()
+                cursor_main.execute(query, query_info)
+                res = cursor_main.fetchall()
 
                 # if variant is not found in the db:
                 if res == []:
                     print("Variant not found in vcf file - scraping excel file and inserting into db")
 
                     # ASSUMPTION: the excel file is in the same folder as the .vcf file
-                    new_path = file_path.replace(file_name, '')          # strip path of the vcf file
+                    new_path = file_path.replace(file_name, '')     # strip path of the vcf file
                     folder = os.listdir(new_path)                   # list everything in the directory
                     target = [i for i in folder if ".xlsx" in i]    # find the excel file
                     data_file = new_path + '/' + target[0]          # add it to the path
@@ -148,7 +168,6 @@ def vcf_scraper(file_path):
                                 
                                 if cell.value == '.':
                                     cell.value = None
-                               
 
                                 if current == "VAF":
                                     query_data_sample[current] = cell.value
@@ -171,10 +190,10 @@ def vcf_scraper(file_path):
 
                                 j += 1
                                 query_data_variant["VAR_STRING"] = query_info["VAR_STRING"]
-                                query_data_variant["VAR_STRING"] += "FOUND"
+                                query_data_variant["VAR_STRING"] += " FOUND"
 
-                            cursor.execute("SET @var_id = uuid()")
-                            cursor.execute("SET @sam_id = uuid()")
+                            cursor_aux.execute("SET @var_id = uuid()")
+                            cursor_aux.execute("SET @sam_id = uuid()")
 
 
                             query_variant = (
@@ -185,21 +204,21 @@ def vcf_scraper(file_path):
                                     "%(ACMG)s, %(FEATURE_ID)s, %(EFFECT)s, %(HGVS_C)s, %(HGVS_P)s, %(ClinVar)s, "
                                     " %(ClinVarCONF)s, %(Varsome_link)s, %(Franklin_link)s)"
                                     )
-                            cursor.execute(query_variant, query_data_variant)
+                            cursor_aux.execute(query_variant, query_data_variant)
 
                             query_sample = (
                                     "INSERT INTO sample "
                                     "(sample_id, file_name, VAF, GT, DP, RELIABLE) VALUES "
                                     "(@sam_id, %(file_name)s, %(VAF)s, %(GT)s, %(DP)s, %(RELIABLE)s)"
                                     )
-                            cursor.execute(query_sample, query_data_sample)
+                            cursor_aux.execute(query_sample, query_data_sample)
 
                             query_instance = (
                                     "INSERT INTO instance(variant_id, sample_id) VALUES (@var_id, @sam_id)"
                                     )
-                            cursor.execute(query_instance, query_data_instance)
+                            cursor_aux.execute(query_instance, query_data_instance)
                             
-                            connection.commit()
+                            connection_aux.commit()
                         else:
                             print("variants not matching")
                 else:
@@ -215,11 +234,16 @@ def vcf_scraper(file_path):
         print("Error connecting to database,", e)
 
     finally:
-        if connection:
-            if connection.is_connected():
-                cursor.close()
-                connection.close()
-                print("Connection closed")
+        if connection_main:
+            if connection_main.is_connected():
+                cursor_main.close()
+                connection_main.close()
+                print("Connection to main db closed")
+        if connection_aux:
+            if connection_aux.is_connected():
+                cursor_aux.close()
+                connection_aux.close()
+                print("Connection to aux db closed")
 
 
 def main():

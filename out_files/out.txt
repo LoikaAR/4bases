@@ -1,0 +1,632 @@
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+extracted var string: chr1332890572GA
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+extracted var string: chr1332890572GA
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332906480AC
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332906980AG
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332907535CTC
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332910721TC
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332911463AG
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332913055AG
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332915005GC
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332929232AG
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332929387TC
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332936646TC
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332973736ATA
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1332973748AG
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1741223094TC
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1741234470AG
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1741244000TC
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1741244435TC
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1741244936GA
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1741245237AG
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+extracted var string: chr1741245466GA
+Variant from vcf file not found in db - scraping excel file and inserting into db
+current file: ../esempio_dati/test_sample//test_sample_ann.xlsx
+Connection closed
+connected to server  8.0.35-0ubuntu0.20.04.1
+connected to database 4evar_test
+current file: ../esempio_dati/CARDIOPRO-CQ1-NA07441/CARDIOPRO-CQ1-NA07441_ann.xlsx
+found 589 variants in CARDIOPRO-CQ1-NA07441_ann
+current file: ../esempio_dati/BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107/BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107_ann.xlsx
+found 20 variants in BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107_ann
+current file: ../esempio_dati/BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107/BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107_ann.xlsx
+found 21 variants in BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107_ann
+current file: ../esempio_dati/CARDIOPRO-CQ1-AA32/CARDIOPRO-CQ1-AA32_ann.xlsx
+found 424 variants in CARDIOPRO-CQ1-AA32_ann
+current file: ../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33_ann.xlsx
+found 389 variants in CARDIOPRO-CQ1-AA33_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD793_5min_37_5cyc/HEVA_Nanopore_HD793_5min_37_5cyc_ann.xlsx
+found 295 variants in HEVA_Nanopore_HD793_5min_37_5cyc_ann
+current file: ../esempio_dati/BRCAPANEL_HD793_CQ242_CQPOOL/BRCAPANEL_HD793_CQ242_CQPOOL_ann.xlsx
+found 21 variants in BRCAPANEL_HD793_CQ242_CQPOOL_ann
+current file: ../esempio_dati/HEVA_Nanopore_AA040_5min_37_5cyc/HEVA_Nanopore_AA040_5min_37_5cyc_ann.xlsx
+found 231 variants in HEVA_Nanopore_AA040_5min_37_5cyc_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD829_5min_37_5cyc/HEVA_Nanopore_HD829_5min_37_5cyc_ann.xlsx
+found 268 variants in HEVA_Nanopore_HD829_5min_37_5cyc_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD794_5min_37_5cyc/HEVA_Nanopore_HD794_5min_37_5cyc_ann.xlsx
+found 275 variants in HEVA_Nanopore_HD794_5min_37_5cyc_ann
+current file: ../esempio_dati/CARDIOPRO-CQ1-HD793/CARDIOPRO-CQ1-HD793_ann.xlsx
+found 705 variants in CARDIOPRO-CQ1-HD793_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD793/HEVA_Nanopore_HD793_ann.xlsx
+found 304 variants in HEVA_Nanopore_HD793_ann
+current file: ../esempio_dati/BRCAPANEL_AA053_CQ242_CQPOOL/BRCAPANEL_AA053_CQ242_CQPOOL_ann.xlsx
+found 14 variants in BRCAPANEL_AA053_CQ242_CQPOOL_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD794/HEVA_Nanopore_HD794_ann.xlsx
+found 283 variants in HEVA_Nanopore_HD794_ann
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+extracted var string: chr1332890572GA
+samres: []
+variant chr1332890572GA present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4842916c-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332906480AC
+samres: []
+variant chr1332906480AC present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('48430ea8-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332906980AG
+samres: []
+variant chr1332906980AG present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4843819d-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332907535CTC
+samres: []
+variant chr1332907535CTC present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4843eb23-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332910721TC
+samres: []
+variant chr1332910721TC present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('48444e56-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332911463AG
+samres: []
+variant chr1332911463AG present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4844a9b7-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332913055AG
+samres: []
+variant chr1332913055AG present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('484502bf-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332915005GC
+samres: []
+variant chr1332915005GC present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('48456ad2-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332929232AG
+samres: []
+variant chr1332929232AG present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4845c0b3-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332929387TC
+samres: []
+variant chr1332929387TC present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('48461700-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332936646TC
+samres: []
+variant chr1332936646TC present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('48467f52-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332973736ATA
+samres: []
+variant chr1332973736ATA present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4846d648-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1332973748AG
+samres: []
+variant chr1332973748AG present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('48473186-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1741223094TC
+samres: []
+variant chr1741223094TC present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('48478726-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1741234470AG
+samres: []
+variant chr1741234470AG present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4847eaf5-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1741244000TC
+samres: []
+variant chr1741244000TC present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4848413e-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1741244435TC
+samres: []
+variant chr1741244435TC present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('484898b7-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1741244936GA
+samres: []
+variant chr1741244936GA present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4848fd22-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1741245237AG
+samres: []
+variant chr1741245237AG present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4849519b-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+extracted var string: chr1741245466GA
+samres: []
+variant chr1741245466GA present, missing sample test_sample_ann. Creating new instance of sample in db
+acquired id = ('4849b9ba-95c8-11ee-bd9d-646ee04f01cd',)
+added new sample to db
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+Connection closed
+connected to server  8.0.35-0ubuntu0.20.04.1
+connected to database 4evar_test
+current file: ../esempio_dati/CARDIOPRO-CQ1-NA07441/CARDIOPRO-CQ1-NA07441_ann.xlsx
+found 589 variants in CARDIOPRO-CQ1-NA07441_ann
+current file: ../esempio_dati/BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107/BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107_ann.xlsx
+found 20 variants in BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107_ann
+current file: ../esempio_dati/BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107/BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107_ann.xlsx
+found 21 variants in BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107_ann
+current file: ../esempio_dati/CARDIOPRO-CQ1-AA32/CARDIOPRO-CQ1-AA32_ann.xlsx
+found 424 variants in CARDIOPRO-CQ1-AA32_ann
+current file: ../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33_ann.xlsx
+found 389 variants in CARDIOPRO-CQ1-AA33_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD793_5min_37_5cyc/HEVA_Nanopore_HD793_5min_37_5cyc_ann.xlsx
+found 295 variants in HEVA_Nanopore_HD793_5min_37_5cyc_ann
+current file: ../esempio_dati/BRCAPANEL_HD793_CQ242_CQPOOL/BRCAPANEL_HD793_CQ242_CQPOOL_ann.xlsx
+found 21 variants in BRCAPANEL_HD793_CQ242_CQPOOL_ann
+current file: ../esempio_dati/HEVA_Nanopore_AA040_5min_37_5cyc/HEVA_Nanopore_AA040_5min_37_5cyc_ann.xlsx
+found 231 variants in HEVA_Nanopore_AA040_5min_37_5cyc_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD829_5min_37_5cyc/HEVA_Nanopore_HD829_5min_37_5cyc_ann.xlsx
+found 268 variants in HEVA_Nanopore_HD829_5min_37_5cyc_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD794_5min_37_5cyc/HEVA_Nanopore_HD794_5min_37_5cyc_ann.xlsx
+found 275 variants in HEVA_Nanopore_HD794_5min_37_5cyc_ann
+current file: ../esempio_dati/CARDIOPRO-CQ1-HD793/CARDIOPRO-CQ1-HD793_ann.xlsx
+found 705 variants in CARDIOPRO-CQ1-HD793_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD793/HEVA_Nanopore_HD793_ann.xlsx
+found 304 variants in HEVA_Nanopore_HD793_ann
+current file: ../esempio_dati/BRCAPANEL_AA053_CQ242_CQPOOL/BRCAPANEL_AA053_CQ242_CQPOOL_ann.xlsx
+found 14 variants in BRCAPANEL_AA053_CQ242_CQPOOL_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD794/HEVA_Nanopore_HD794_ann.xlsx
+found 283 variants in HEVA_Nanopore_HD794_ann
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+extracted var string: chr1332890572GA
+samres: []
+variant chr1332890572GA present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332906480AC
+samres: []
+variant chr1332906480AC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332906980AG
+samres: []
+variant chr1332906980AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332907535CTC
+samres: []
+variant chr1332907535CTC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332910721TC
+samres: []
+variant chr1332910721TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332911463AG
+samres: []
+variant chr1332911463AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332913055AG
+samres: []
+variant chr1332913055AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332915005GC
+samres: []
+variant chr1332915005GC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332929232AG
+samres: []
+variant chr1332929232AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332929387TC
+samres: []
+variant chr1332929387TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332936646TC
+samres: []
+variant chr1332936646TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332973736ATA
+samres: []
+variant chr1332973736ATA present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332973748AG
+samres: []
+variant chr1332973748AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741223094TC
+samres: []
+variant chr1741223094TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741234470AG
+samres: []
+variant chr1741234470AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741244000TC
+samres: []
+variant chr1741244000TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741244435TC
+samres: []
+variant chr1741244435TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741244936GA
+samres: []
+variant chr1741244936GA present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741245237AG
+samres: []
+variant chr1741245237AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741245466GA
+samres: []
+variant chr1741245466GA present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+Connection closed
+connected to server  8.0.35-0ubuntu0.20.04.1
+connected to database 4evar_test
+current file: ../esempio_dati/CARDIOPRO-CQ1-NA07441/CARDIOPRO-CQ1-NA07441_ann.xlsx
+found 589 variants in CARDIOPRO-CQ1-NA07441_ann
+current file: ../esempio_dati/BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107/BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107_ann.xlsx
+found 20 variants in BRCAPANEL_AA053_CQ42_PROVAPOOL_CQ107_ann
+current file: ../esempio_dati/BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107/BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107_ann.xlsx
+found 21 variants in BRCAPANEL_HD793_CQ42_PROVAPOOL_CQ107_ann
+current file: ../esempio_dati/CARDIOPRO-CQ1-AA32/CARDIOPRO-CQ1-AA32_ann.xlsx
+found 424 variants in CARDIOPRO-CQ1-AA32_ann
+current file: ../esempio_dati/CARDIOPRO-CQ1-AA33/CARDIOPRO-CQ1-AA33_ann.xlsx
+found 389 variants in CARDIOPRO-CQ1-AA33_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD793_5min_37_5cyc/HEVA_Nanopore_HD793_5min_37_5cyc_ann.xlsx
+found 295 variants in HEVA_Nanopore_HD793_5min_37_5cyc_ann
+current file: ../esempio_dati/BRCAPANEL_HD793_CQ242_CQPOOL/BRCAPANEL_HD793_CQ242_CQPOOL_ann.xlsx
+found 21 variants in BRCAPANEL_HD793_CQ242_CQPOOL_ann
+current file: ../esempio_dati/HEVA_Nanopore_AA040_5min_37_5cyc/HEVA_Nanopore_AA040_5min_37_5cyc_ann.xlsx
+found 231 variants in HEVA_Nanopore_AA040_5min_37_5cyc_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD829_5min_37_5cyc/HEVA_Nanopore_HD829_5min_37_5cyc_ann.xlsx
+found 268 variants in HEVA_Nanopore_HD829_5min_37_5cyc_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD794_5min_37_5cyc/HEVA_Nanopore_HD794_5min_37_5cyc_ann.xlsx
+found 275 variants in HEVA_Nanopore_HD794_5min_37_5cyc_ann
+current file: ../esempio_dati/CARDIOPRO-CQ1-HD793/CARDIOPRO-CQ1-HD793_ann.xlsx
+found 705 variants in CARDIOPRO-CQ1-HD793_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD793/HEVA_Nanopore_HD793_ann.xlsx
+found 304 variants in HEVA_Nanopore_HD793_ann
+current file: ../esempio_dati/BRCAPANEL_AA053_CQ242_CQPOOL/BRCAPANEL_AA053_CQ242_CQPOOL_ann.xlsx
+found 14 variants in BRCAPANEL_AA053_CQ242_CQPOOL_ann
+current file: ../esempio_dati/HEVA_Nanopore_HD794/HEVA_Nanopore_HD794_ann.xlsx
+found 283 variants in HEVA_Nanopore_HD794_ann
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+extracted var string: chr1332890572GA
+samres: []
+variant chr1332890572GA present, missing sample test_sample_ann. Creating new instance of sample in db
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+extracted var string: chr1332890572GA
+samres: []
+variant chr1332890572GA present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332906480AC
+samres: []
+variant chr1332906480AC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332906980AG
+samres: []
+variant chr1332906980AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332907535CTC
+samres: []
+variant chr1332907535CTC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332910721TC
+samres: []
+variant chr1332910721TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332911463AG
+samres: []
+variant chr1332911463AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332913055AG
+samres: []
+variant chr1332913055AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332915005GC
+samres: []
+variant chr1332915005GC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332929232AG
+samres: []
+variant chr1332929232AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332929387TC
+samres: []
+variant chr1332929387TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332936646TC
+samres: []
+variant chr1332936646TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332973736ATA
+samres: []
+variant chr1332973736ATA present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1332973748AG
+samres: []
+variant chr1332973748AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741223094TC
+samres: []
+variant chr1741223094TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741234470AG
+samres: []
+variant chr1741234470AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741244000TC
+samres: []
+variant chr1741244000TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741244435TC
+samres: []
+variant chr1741244435TC present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741244936GA
+samres: []
+variant chr1741244936GA present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741245237AG
+samres: []
+variant chr1741245237AG present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+extracted var string: chr1741245466GA
+samres: []
+variant chr1741245466GA present, missing sample test_sample_ann. Creating new instance of sample in db
+added new sample to db
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+extracted var string: chr1332890572GA
+samres: [('f5103896-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332890572GA and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332906480AC
+samres: [('f51d84e0-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332906480AC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332906980AG
+samres: [('f5295382-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332906980AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332907535CTC
+samres: [('f534adb5-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332907535CTC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332910721TC
+samres: [('f540135d-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332910721TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332911463AG
+samres: [('f54b6c28-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332911463AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332913055AG
+samres: [('f556bf74-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332913055AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332915005GC
+samres: [('f55d4b28-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332915005GC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332929232AG
+samres: [('f561b172-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332929232AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332929387TC
+samres: [('f5661d97-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332929387TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332936646TC
+samres: [('f56a32f6-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332936646TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332973736ATA
+samres: [('f56e3d2c-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332973736ATA and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332973748AG
+samres: [('f5724970-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332973748AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741223094TC
+samres: [('f5765ca7-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741223094TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741234470AG
+samres: [('f57a86d6-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741234470AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741244000TC
+samres: [('f57e9370-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741244000TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741244435TC
+samres: [('f5829945-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741244435TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741244936GA
+samres: [('f586ad5d-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741244936GA and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741245237AG
+samres: [('f58af74a-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741245237AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741245466GA
+samres: [('f58f3be2-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741245466GA and sample test_sample_ann already present, writing variant into tsv
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+extracted var string: chr1332890572GA
+samres: [('f5103896-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332890572GA and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332906480AC
+samres: [('f51d84e0-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332906480AC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332906980AG
+samres: [('f5295382-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332906980AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332907535CTC
+samres: [('f534adb5-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332907535CTC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332910721TC
+samres: [('f540135d-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332910721TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332911463AG
+samres: [('f54b6c28-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332911463AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332913055AG
+samres: [('f556bf74-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332913055AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332915005GC
+samres: [('f55d4b28-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332915005GC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332929232AG
+samres: [('f561b172-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332929232AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332929387TC
+samres: [('f5661d97-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332929387TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332936646TC
+samres: [('f56a32f6-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332936646TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332973736ATA
+samres: [('f56e3d2c-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332973736ATA and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332973748AG
+samres: [('f5724970-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332973748AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741223094TC
+samres: [('f5765ca7-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741223094TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741234470AG
+samres: [('f57a86d6-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741234470AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741244000TC
+samres: [('f57e9370-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741244000TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741244435TC
+samres: [('f5829945-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741244435TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741244936GA
+samres: [('f586ad5d-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741244936GA and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741245237AG
+samres: [('f58af74a-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741245237AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741245466GA
+samres: [('f58f3be2-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741245466GA and sample test_sample_ann already present, writing variant into tsv
+Connection closed
+Connected to server  8.0.35-0ubuntu0.20.04.1
+Connected to database 4evar_test
+extracted var string: chr1332890572GA
+samres: [('f5103896-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332890572GA and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332906480AC
+samres: [('f51d84e0-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332906480AC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332906980AG
+samres: [('f5295382-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332906980AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332907535CTC
+samres: [('f534adb5-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332907535CTC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332910721TC
+samres: [('f540135d-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332910721TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332911463AG
+samres: [('f54b6c28-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332911463AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332913055AG
+samres: [('f556bf74-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332913055AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332915005GC
+samres: [('f55d4b28-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332915005GC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332929232AG
+samres: [('f561b172-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332929232AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332929387TC
+samres: [('f5661d97-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332929387TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332936646TC
+samres: [('f56a32f6-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332936646TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332973736ATA
+samres: [('f56e3d2c-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332973736ATA and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1332973748AG
+samres: [('f5724970-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1332973748AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741223094TC
+samres: [('f5765ca7-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741223094TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741234470AG
+samres: [('f57a86d6-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741234470AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741244000TC
+samres: [('f57e9370-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741244000TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741244435TC
+samres: [('f5829945-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741244435TC and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741244936GA
+samres: [('f586ad5d-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741244936GA and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741245237AG
+samres: [('f58af74a-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741245237AG and sample test_sample_ann already present, writing variant into tsv
+extracted var string: chr1741245466GA
+samres: [('f58f3be2-95cd-11ee-bd9d-646ee04f01cd',)]
+variant chr1741245466GA and sample test_sample_ann already present, writing variant into tsv
+Connection closed

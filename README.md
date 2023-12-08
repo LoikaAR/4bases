@@ -8,9 +8,10 @@ db_manager.py:
 + program to populate the db with all variants and samples found in a given directory
     + the given directory needs to contain folders that have a correctly formatted .xlsx file
 + connects to a MySQL database, according to specifications in db_config dict
++ requires the folder path to be passed as command line parameter
 + MySQL db needs to already contain tables with matching column names and types
 + to run:
-    + python3 db_manager.py >> out_files/out.txt
+    + python3 db_manager.py ./path/to/folder >> out_files/out.txt
     + check out.txt for database insert actions / errors and connection status
 
 db_interface.py:
