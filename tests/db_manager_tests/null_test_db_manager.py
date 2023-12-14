@@ -24,7 +24,7 @@ try:
         db_info = connection.get_server_info()
         print("connected to server ", db_info)
 
-        cursor = connection.cursor(buffered=True) # buffered prevents unread result error 
+        cursor = connection.cursor(buffered=True)
         cursor.execute("select database();")
 
         record = cursor.fetchone()[0]
@@ -64,6 +64,7 @@ try:
                     rows[0][i].value = "_".join(rows[0][i].value.split())
                     
             for i in range (1, len(rows)):
+                # prepare the data, record row and col num to crosscheck db and excel file
                 query_data_vaf = {
                     "vaf_id": None,
                     "val": None,

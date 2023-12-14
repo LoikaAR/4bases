@@ -1,9 +1,7 @@
 import json
 import csv
-import pandas as pd
 import mysql.connector
 from mysql.connector import Error
-from openpyxl import load_workbook
 
 connection = None       # prepare connection
 DP_THRESHOLD = 20       # depth threshold
@@ -15,6 +13,7 @@ db_config = {
     'password': 'PassMass123!'
 }
 
+# verify integrity of all newly added variants
 def test_variants():
     try:
         connection = mysql.connector.connect(**db_config)
@@ -29,20 +28,17 @@ def test_variants():
             data = json.load(file)
             cardinal_fail = False
 
-
             if (len(data) % 2 != 0):
                 print('incorrect cardinality')
                 cardinal_fail = True
 
-
             count_fail = False
             relation_fail = False
             var_idx = 0
+
             # iterate over every retrieved variant
             while var_idx < len(data)-1:
                 sam_idx = var_idx + 1
-                # print('var id:',data[var_idx].get('variant_id'))
-                # print('sam id:',data[sam_idx].get('sample_id'))
                 count_query = ('SELECT COUNT(*) FROM variant WHERE VAR_STRING = %s') # should be 1
                 cursor.execute(count_query, [data[var_idx].get('VAR_STRING')])
                 count_res = cursor.fetchone()[0]
@@ -80,7 +76,7 @@ def test_variants():
                 connection.close()
                 print("Connection closed")
 
-
+# verify integrity of all newly added samples
 def test_samples():
     try:
         connection = mysql.connector.connect(**db_config)
@@ -138,6 +134,7 @@ def test_samples():
                 connection.close()
                 print("Connection closed")
 
+# verify integrity of all existing variants
 def test_existing():
     try:
         connection = mysql.connector.connect(**db_config)
@@ -184,11 +181,9 @@ def test_existing():
                 print("Connection closed")
 
 
-
-
 def main():
-    # test_variants()
-    # test_samples()
+    test_variants()
+    test_samples()
     test_existing()
 
 main()

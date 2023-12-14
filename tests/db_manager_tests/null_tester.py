@@ -1,7 +1,6 @@
 import os
 import sys
 import mysql.connector
-from colorama import Fore
 from openpyxl import load_workbook
 from mysql.connector import Error
 
@@ -20,7 +19,7 @@ try:
         db_info = connection.get_server_info()
         print("connected to server ", db_info)
 
-        cursor = connection.cursor(buffered=True) # buffered prevents unread result error 
+        cursor = connection.cursor(buffered=True)
         cursor.execute("select database();")
 
         record = cursor.fetchone()[0]
@@ -43,7 +42,6 @@ try:
 
             rows = list(ws.rows)
             cols = list(ws.columns)
-            # print(f"found {len(rows)} variants in this file\n")
 
             # remove whitespaces so col names work with MySQL syntax
             for i in range(len(rows[0])):
@@ -54,6 +52,8 @@ try:
                 j = 0
                 for cell in rows[i]:
                     current = rows[0][j].value # the column name
+
+                    # execute the matching based on which value is being considered:
                     if current == "VAF":
                         if cell.value == '.' or cell.value == None:
                             res = {"row": i, "col": j, "file":file}
@@ -89,11 +89,11 @@ try:
         fail = False
         for b in NULL_MATCHES:
             if b == False:
-                print(Fore.RED + "TESTS FAILED")
+                print("TESTS FAILED")
                 fail = True
                 break
         if fail == False:
-            print(Fore.GREEN + "TESTS PASSED")
+            print("TESTS PASSED")
             
         cursor.close()
 

@@ -1,6 +1,5 @@
 import os
 import sys
-from colorama import Fore
 sys.path.append(os.path.relpath('../../'))
 from db_interface import *
 import mysql.connector
