@@ -6,7 +6,7 @@ from db_interface import *
 import mysql.connector
 from mysql.connector import Error
 
-connection = None # prepare the connection
+connection = None                   # prepare the connection
 path = str(sys.argv[1])             # the location of the folder with target files
 dir_list = list(os.listdir(path))   # list of all files in the target folder
 
@@ -41,8 +41,8 @@ def main():
                 res_var1 = variants_in_sample(sample_file) # returns a vector of dict objects - ID, var_string
                 file_mismatch = False
                 relation_mismatch = False
+
                 # for every returned var string, verify that 1) it belongs to its ID, 2) it actually is found in sample_file
-                
                 for elem in res_var1:
                     q_verify_relation = ("SELECT VAR_STRING FROM variant WHERE variant_id = %s")
                     cursor.execute(q_verify_relation, [elem["ID"]])

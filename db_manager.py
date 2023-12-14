@@ -9,6 +9,7 @@ dir_list = list(os.listdir(path))   # list of all files in the target folder
 connection = None                   # prepare the connection
 DP_THRESHOLD = 20                   # depth threshold
 
+# database, user, host, password config
 db_config = {
     'host': 'localhost',
     'database': '4evar_test',
@@ -18,15 +19,14 @@ db_config = {
 
 def main():
     try: 
-        connection = mysql.connector.connect(**db_config) # user and password should be parameters?
+        connection = mysql.connector.connect(**db_config)
 
         if connection and connection.is_connected():
+            # connect to server and select db
             db_info = connection.get_server_info()
             print("connected to server ", db_info)
-
-            cursor = connection.cursor(buffered=True) # buffered=True prevents unread result error 
+            cursor = connection.cursor(buffered=True)
             cursor.execute("select database();")
-
             db_name = cursor.fetchone()[0]
             print("connected to database", db_name)
 
@@ -43,7 +43,7 @@ def main():
                 print("current file:", data_file)
                 
                 wb = load_workbook(data_file) # Load the entire workbook
-                ws = wb['Sheet1']             # Load the worksheet
+                ws = wb['Sheet1']             # Load the worksheet (assuming the name is 'Sheet1')
 
                 rows = list(ws.rows)
                 cols = list(ws.columns)
@@ -118,24 +118,21 @@ def main():
                         query_data_variant["VAR_STRING"] = variant_string
                         j += 1
 
-                    # print(variant_string)
-
                     # check that var string already exists
                     query_check_vs = ("SELECT variant_id FROM variant WHERE VAR_STRING = %(VAR_STRING)s")
                     cursor.execute(query_check_vs, query_data_variant)
-
                     vs_res = cursor.fetchone()
-
+                    
+                    # set ID's with mysql
                     cursor.execute("SET @var_id = uuid()")
                     cursor.execute("SET @sam_id = uuid()")
-
-                    # print("vs_res:", vs_res)
 
                     query_sample = (
                             "INSERT INTO sample "
                             "(sample_id, file_name, VAF, GT, DP, RELIABLE) VALUES "
                             "(@sam_id, %(file_name)s, %(VAF)s, %(GT)s, %(DP)s, %(RELIABLE)s)"
                             )
+                    
                     cursor.execute(query_sample, query_data_sample)
 
                     # if variant string was not present:
@@ -160,9 +157,6 @@ def main():
                                 "INSERT INTO instance(variant_id, sample_id) VALUES (%s, @sam_id)"
                                 )
                         cursor.execute(query_instance, [vs_res][0])
-
-
-            
                     connection.commit()
             cursor.close()
 

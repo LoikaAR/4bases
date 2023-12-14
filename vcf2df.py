@@ -16,10 +16,8 @@ db_config = {
     'password': 'PassMass123!'
 }
 
-new_vars = []
-new_samples = []
-
-# res = {'new_vars': [], 'new_samples': [] }
+new_vars = []    # list for newly added variants (+ their respective samples)
+new_samples = [] # list for newly added samples (+ their respective existing variant string)
 
 def vcf_scraper(file_path):
     file_name = file_path.split('/')[-1]
@@ -40,11 +38,10 @@ def vcf_scraper(file_path):
                         header = line.strip('#').strip().split('\t')
                         break
 
-            # read the vcf file
+            # read the .vcf file
             data = pd.read_csv(file_path, sep ='\t', skiprows=i, header=None)
             pd.set_option('display.max_rows', data.shape[0]+1)
             pd.set_option('display.max_columns', 20)
-
             data.columns = header
             target_data = data[['CHROM', 'POS', 'REF', 'ALT']]
             n_rows = target_data.shape[0]
@@ -74,11 +71,8 @@ def vcf_scraper(file_path):
                     elif target_data.iloc[0,col] == "ALT":
                         extracted_info["ALT"] = target_data.iloc[row, col]
                 
-                vs = query_info["VAR_STRING"]
-                print("extracted var string:", vs)
-
-                query_varstring = ("SELECT * FROM variant WHERE VAR_STRING = %(VAR_STRING)s") #  ask about concatenation
-
+                # check if variant string exists in the db
+                query_varstring = ("SELECT * FROM variant WHERE VAR_STRING = %(VAR_STRING)s")
                 cursor.execute(query_varstring, query_info)
                 res = cursor.fetchall()
 
@@ -151,6 +145,7 @@ def vcf_scraper(file_path):
                                 "variant_id": None,
                                 "sample_id": None
                             }
+
                             # populate the query_data structure
                             j = 0
                             variant_string = ""
@@ -160,6 +155,7 @@ def vcf_scraper(file_path):
                                 if cell.value == '.':
                                     cell.value = None
 
+                                # assign the relevant data
                                 if current == "VAF":
                                     query_data_newsam[current] = cell.value
                                 elif current == "DP":
@@ -170,28 +166,27 @@ def vcf_scraper(file_path):
                                         query_data_newsam[current] = 1
                                     elif cell.value == "hom":
                                         query_data_newsam[current] = 2
-
                                 else:
-                                    # print(f"{current}: {cell.value}}")
                                     query_data_variant[current] = cell.value
                                     if (current == "CHROM" or current == "REF"):
                                         variant_string += str(cell.value)
                                     elif (current == "POS" or current == "ALT"):
                                         variant_string += str(cell.value)
-
                                 query_data_variant["VAR_STRING"] = query_info["VAR_STRING"]
                                 j += 1
 
+                            # assign ID's with mysql and retrieve them
                             cursor.execute("SET @var_id = uuid()")
                             cursor.execute("SELECT @var_id;")
                             var_id = cursor.fetchone()[0]
                             query_data_variant["variant_id"] = var_id
-                            
+
                             cursor.execute("SET @sam_id = uuid()")
                             cursor.execute("SELECT @sam_id;")
                             sam_id = cursor.fetchone()[0]
                             query_data_newsam["sample_id"] = sam_id
                             
+                            # insert queries for database
                             query_variant = (
                                     "INSERT INTO variant "
                                     "(variant_id, VAR_STRING, CHROM, POS, REF, ALT, GENE, ACMG, FEATURE_ID, "
@@ -232,7 +227,7 @@ def vcf_scraper(file_path):
 
                     print("samres:", sam_res)
                     
-                    # if sample is also present, append to tsv
+                    # if sample is also present, append to .tsv file
                     if sam_res != []:
                         print(f"variant {query_info['VAR_STRING']} and sample {db_file_name[0]} already present, writing variant into tsv")
                         
@@ -303,11 +298,11 @@ def vcf_scraper(file_path):
                                             query_data_newsam[current] = 2
                                     j += 1
 
+                        # set the sample id with mysql
                         cursor.execute("SET @sam_id = uuid()")
                         cursor.execute("SELECT @sam_id;")
                         sam_id = cursor.fetchone()[0]
                         query_data_newsam["sample_id"] = sam_id
-                            
 
                         query_sample = (
                                     "INSERT INTO sample "
@@ -317,7 +312,8 @@ def vcf_scraper(file_path):
                         
                         cursor.execute(query_sample, query_data_newsam)
                         existing_var = {"var_string": query_info['VAR_STRING']}
-                        
+
+                        # append inserted sample and its EXISTING variant string
                         new_samples.append(query_data_newsam)
                         new_samples.append(existing_var)
 
@@ -338,6 +334,8 @@ def vcf_scraper(file_path):
                 cursor.close()
                 connection.close()
                 print("Connection closed")
+                # dump the newly added variants and samples into json files
+                # necessary for later testing
                 with open('./tests/vcf2df_tests/new_samples.json', 'w') as log:
                     json.dump(new_samples, log)
 

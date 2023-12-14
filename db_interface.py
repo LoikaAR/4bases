@@ -10,7 +10,8 @@ db_config = {
     'password': 'PassMass123!'
 }
 
-# returns all variants present in a given sample
+# finds all variants present in a given sample
+# return: list of variant id, variant string
 def variants_in_sample(sample_file_name):
     sample_file_name = [sample_file_name] # conversion to iterable needed for mysql connector
     res = []
