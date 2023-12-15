@@ -60,3 +60,4 @@ TESTS:
 
 + vcf2df
     + Accesses new_samples.json and new_variants.json to verify they did not exist before vcf2df.py ran (verify cardinality) as well as that they are connected with the correct variant/sample in the db
+    + NOTE: it was tested with test_sample folder, remove it or add it as necessary
